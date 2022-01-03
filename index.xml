@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title></title>
+    <title>Блог</title>
     <link>https://alebsys.github.io/</link>
-    <description>Recent content on </description>
+    <description>Recent content on Блог</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 03 Jan 2022 15:01:19 +0300</lastBuildDate><atom:link href="https://alebsys.github.io/index.xml" rel="self" type="application/rss+xml" />
@@ -13,16 +13,19 @@
       <pubDate>Mon, 03 Jan 2022 15:01:19 +0300</pubDate>
       
       <guid>https://alebsys.github.io/about/</guid>
-      <description>&amp;hellip;.</description>
+      <description>Системный инженер в Самокат. Развиваюсь в облачных технологий, оркестрации и распределенных систем.
+LinkedIn | Telegram | Github</description>
     </item>
     
     <item>
       <title>Привет, 2022!</title>
-      <link>https://alebsys.github.io/posts/hello_2022/</link>
+      <link>https://alebsys.github.io/posts/%D0%BF%D1%80%D0%B8%D0%B2%D0%B5%D1%82-2022/</link>
       <pubDate>Mon, 03 Jan 2022 15:01:19 +0300</pubDate>
       
-      <guid>https://alebsys.github.io/posts/hello_2022/</guid>
-      <description>Новый год - время планов и понедельников, с которых все начинают.</description>
+      <guid>https://alebsys.github.io/posts/%D0%BF%D1%80%D0%B8%D0%B2%D0%B5%D1%82-2022/</guid>
+      <description>Новый год - время планов и понедельников, с которых все начинают. Не хочу нарушать традиций и посему открываю блог.
+Обязуюсь честно продержаться пару месяцев, а там посмотрим.
+Всем привет!</description>
     </item>
     
   </channel>

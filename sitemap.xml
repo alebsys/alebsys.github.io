@@ -2,21 +2,19 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://alebsys.github.io/</loc>
+    <loc>https://alebsys.github.io/posts/</loc>
     <lastmod>2022-01-03T15:01:19+03:00</lastmod>
   </url><url>
-    <loc>https://alebsys.github.io/posts/</loc>
+    <loc>https://alebsys.github.io/</loc>
     <lastmod>2022-01-03T15:01:19+03:00</lastmod>
   </url><url>
     <loc>https://alebsys.github.io/about/</loc>
     <lastmod>2022-01-03T15:01:19+03:00</lastmod>
   </url><url>
-    <loc>https://alebsys.github.io/posts/hello_2022/</loc>
+    <loc>https://alebsys.github.io/posts/%D0%BF%D1%80%D0%B8%D0%B2%D0%B5%D1%82-2022/</loc>
     <lastmod>2022-01-03T15:01:19+03:00</lastmod>
   </url><url>
     <loc>https://alebsys.github.io/categories/</loc>
-  </url><url>
-    <loc>https://alebsys.github.io/series/</loc>
   </url><url>
     <loc>https://alebsys.github.io/tags/</loc>
   </url>
