@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+
+
+<html lang="en-us" data-theme="">
+<head>
+    
+        
+<meta charset="utf-8">
+<meta name="HandheldFriendly" content="True">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+
+<title>REST API на golang. Часть первая - О технологиях и не только.</title>
+
+<meta name="description" content="Введение в пакет http.">
+
+
+
+<link rel="icon" type="image/x-icon" href="https://alebsys.github.io/favicon.ico">
+<link rel="apple-touch-icon-precomposed" href="https://alebsys.github.io/favicon.png">
+
+
+
+    
+
+
+
+
+
+    
+    
+        
+    
+    
+
+    
+        <link rel="stylesheet" href="https://alebsys.github.io/css/style.min.fd95df255d735d1bbbe9d010ac1dbb4c1867757afcdf7106e6de20cb79789590.css" integrity="sha256-/ZXfJV1zXRu76dAQrB27TBhndXr833EG5t4gy3l4lZA=">
+    
+
+
+
+
+
+
+<meta property="og:title" content="REST API на golang. Часть первая" />
+<meta property="og:description" content="Введение в пакет http." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://alebsys.github.io/posts/restapi_golang_1/" /><meta property="og:image" content="https://alebsys.github.io/images/avatar.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-01-08T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-01-08T00:00:00+00:00" />
+
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://alebsys.github.io/images/avatar.png"/>
+
+<meta name="twitter:title" content="REST API на golang. Часть первая"/>
+<meta name="twitter:description" content="Введение в пакет http."/>
+
+
+
+    
+        <link rel="webmention" href="https://webmention.io/hugo-theme-anubis/webmention" />
+        
+            <link rel="pingback" href="https://webmention.io/hugo-theme-anubis/xmlrpc" />
+        
+    
+    
+        <link rel="webmention" href="https://yourdomain.com/webemntions/receive" />
+    
+
+
+
+
+
+
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VDR541GTVE"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-VDR541GTVE', { 'anonymize_ip': false });
+}
+</script>
+
+
+
+
+
+    
+</head>
+<body>
+    <a class="skip-main" href="#main">Skip to main content</a>
+    <div class="container">
+        <header class="common-header"> 
+            
+                <div class="header-top">
+    <h1 class="site-title">
+        <a href="/">О технологиях и не только.</a>
+    </h1>
+    <ul class="social-icons">
+
+
+    
+        
+        
+        <li>
+            <a href="https://github.com/alebsys" title="Github" rel="me">
+            <span class="inline-svg" >
+
+
+
+
+    
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+
+</span>
+
+            </a>
+        </li>
+    
+
+    
+        
+        
+        <li>
+            <a href="tg://resolve?domain=alebsys" title="Telegram" rel="me">
+            <span class="inline-svg" >
+
+
+
+
+    
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path fill="currentColor" d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm121.8 169.9l-40.7 191.8c-3 13.6-11.1 16.9-22.4 10.5l-62-45.7-29.9 28.8c-3.3 3.3-6.1 6.1-12.5 6.1l4.4-63.1 114.9-103.8c5-4.4-1.1-6.9-7.7-2.5l-142 89.4-61.2-19.1c-13.3-4.2-13.6-13.3 2.8-19.7l239.1-92.2c11.1-4 20.8 2.7 17.2 19.5z"/></svg>
+
+</span>
+
+            </a>
+        </li>
+    
+
+    
+        
+        
+        <li>
+            <a href="https://www.linkedin.com/in/александр-лебедев-33b9811a7" title="Linkedin" rel="me">
+            <span class="inline-svg" >
+
+
+
+
+    
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+
+</span>
+
+            </a>
+        </li>
+    
+
+</ul>
+
+</div>
+
+    <nav>
+        
+        
+        <a class="" href="https://alebsys.github.io/about/" title="About">About</a>
+        
+        <a class="" href="https://alebsys.github.io/posts/" title="Archive">Archive</a>
+        
+    </nav>
+
+
+
+
+            
+        </header>
+        <main id="main" tabindex="-1"> 
+            
+    
+
+    <article class="post h-entry">
+        <div class="post-header">
+            <header>
+                <h1 class="p-name post-title">REST API на golang. Часть первая</h1>
+
+                
+            </header>
+        </div>
+        <div class="content e-content">
+            <h3 id="преамбула">Преамбула
+<span><a href="#%d0%bf%d1%80%d0%b5%d0%b0%d0%bc%d0%b1%d1%83%d0%bb%d0%b0">#</a></span>
+</h3><p>На <strong>YouTube</strong> мне попался толковый курс <a href="https://www.youtube.com/playlist?list=PLmD8u-IFdreyh6EUfevBcbiuCKzFk0EW_">Building Microservices with Go</a> от Nic Jackson. Параллельно с изучением буду писать небольшие заметки.</p>
+<h3 id="часть-первая">Часть первая
+<span><a href="#%d1%87%d0%b0%d1%81%d1%82%d1%8c-%d0%bf%d0%b5%d1%80%d0%b2%d0%b0%d1%8f">#</a></span>
+</h3><p>В первой части познакомимся с азами <a href="https://pkg.go.dev/net/http">http</a> пакета и построим простой, но вполне рабочий вебсервер.</p>
+<p>Примером выступит:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;fmt&#34;</span>
+	<span style="color:#e6db74">&#34;io/ioutil&#34;</span>
+	<span style="color:#e6db74">&#34;log&#34;</span>
+	<span style="color:#e6db74">&#34;net/http&#34;</span>
+)
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">handlerHello</span>(<span style="color:#a6e22e">rw</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ResponseWriter</span>, <span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Request</span>) {
+	<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;request to /hello&#34;</span>)
+	<span style="color:#a6e22e">d</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">ioutil</span>.<span style="color:#a6e22e">ReadAll</span>(<span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">Body</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Error</span>(<span style="color:#a6e22e">rw</span>, <span style="color:#e6db74">&#34;error!&#34;</span>, <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusBadRequest</span>)
+		<span style="color:#66d9ef">return</span>
+	}
+
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Fprintf</span>(<span style="color:#a6e22e">rw</span>, <span style="color:#e6db74">&#34;Hello %s&#34;</span>, <span style="color:#a6e22e">d</span>)
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">handlerBye</span>(<span style="color:#a6e22e">rw</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ResponseWriter</span>, <span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Request</span>) {
+	<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;request to /bye&#34;</span>)
+	<span style="color:#a6e22e">d</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">ioutil</span>.<span style="color:#a6e22e">ReadAll</span>(<span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">Body</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Error</span>(<span style="color:#a6e22e">rw</span>, <span style="color:#e6db74">&#34;error!&#34;</span>, <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusBadGateway</span>)
+		<span style="color:#66d9ef">return</span>
+	}
+
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Fprintf</span>(<span style="color:#a6e22e">rw</span>, <span style="color:#e6db74">&#34;Bye %s&#34;</span>, <span style="color:#a6e22e">d</span>)
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+
+	<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">HandleFunc</span>(<span style="color:#e6db74">&#34;/hello&#34;</span>, <span style="color:#a6e22e">handlerHello</span>)
+	<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">HandleFunc</span>(<span style="color:#e6db74">&#34;/bye&#34;</span>, <span style="color:#a6e22e">handlerBye</span>)
+
+	<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ListenAndServe</span>(<span style="color:#e6db74">&#34;:9090&#34;</span>, <span style="color:#66d9ef">nil</span>)
+}
+</code></pre></div><p>Приступим.</p>
+<h3 id="точка-входа-listenandserve">Точка входа. ListenAndServe()
+<span><a href="#%d1%82%d0%be%d1%87%d0%ba%d0%b0-%d0%b2%d1%85%d0%be%d0%b4%d0%b0-listenandserve">#</a></span>
+</h3><p>Начнем с определения функции:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ListenAndServe</span>(<span style="color:#a6e22e">addr</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">handler</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Handler</span>) <span style="color:#66d9ef">error</span>
+</code></pre></div><p><a href="https://pkg.go.dev/net/http@go1.17.6#Server.ListenAndServe"><code>ListenAndServe()</code></a> принимает в качестве параметров <code>addr</code> и обработчик <code>handler</code>, где:</p>
+<ul>
+<li><code>addr</code> - адрес и порт которые &ldquo;слушает&rdquo; вебсервер;</li>
+<li><code>handler</code> - обработчик, чья задача, как следует из названия, обрабатывать входящие запросы.</li>
+</ul>
+<p>В нашем случае:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ListenAndServe</span>(<span style="color:#e6db74">&#34;:9090&#34;</span>, <span style="color:#66d9ef">nil</span>)
+</code></pre></div><ul>
+<li>Веб-сервер ожидает подключений на 9090 порту с любых адресов;</li>
+<li>Конкретный <code>handler</code> не определен (<code>nil</code>), поэтому будет использоваться стандартный - <code>DefaultServeMux</code>. В будущем коснемся этой темы.</li>
+</ul>
+<h3 id="что-есть-handler">Что есть Handler
+<span><a href="#%d1%87%d1%82%d0%be-%d0%b5%d1%81%d1%82%d1%8c-handler">#</a></span>
+</h3><p><a href="https://pkg.go.dev/net/http@go1.17.6#Handler"><code>Handler</code></a> под капотом являет собой тип <code>interface</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Handler</span> <span style="color:#66d9ef">interface</span> {
+	<span style="color:#a6e22e">ServeHTTP</span>(<span style="color:#a6e22e">ResponseWriter</span>, <span style="color:#f92672">*</span><span style="color:#a6e22e">Request</span>)
+}
+</code></pre></div><p>Метод <code>ServeHTTP()</code> принимает <a href="https://pkg.go.dev/net/http@go1.17.6#Request"><code>Request</code></a> (структура) и пишет ответ в <a href="https://pkg.go.dev/net/http@go1.17.6#ResponseWriter"><code>ResponseWriter</code></a> (так же интерфейс).</p>
+<p>В целом логика следующая:</p>
+<ol>
+<li>поступает новый запрос по <code>url</code> <code>&lt;SERVER_ADDRESS&gt;:9090/hello</code> ;</li>
+<li><code>ListenAndServe()</code> вызывает обработчик <code>handlerHello</code>, так как путь <code>/hello</code> совпадает с его <code>pattern</code>.</li>
+</ol>
+<h3 id="регистрация-handler">Регистрация handler
+<span><a href="#%d1%80%d0%b5%d0%b3%d0%b8%d1%81%d1%82%d1%80%d0%b0%d1%86%d0%b8%d1%8f-handler">#</a></span>
+</h3><p>Перед использованием, следует зарегистрировать обработчик через функцию <a href="https://pkg.go.dev/net/http@go1.17.6#HandleFunc"><code>HandleFunc()</code></a>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">HandleFunc</span>(<span style="color:#a6e22e">pattern</span> <span style="color:#66d9ef">string</span>, <span style="color:#a6e22e">handler</span> <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ResponseWriter</span>, <span style="color:#f92672">*</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Request</span>))
+</code></pre></div><ul>
+<li><code>pattern</code> - проверяет соответствие пути запроса. Подробнее в <a href="https://ru.wikipedia.org/wiki/URL#%D0%A1%D1%82%D1%80%D1%83%D0%BA%D1%82%D1%83%D1%80%D0%B0_URL">Wiki</a>;</li>
+<li><code>handler</code> - определенный экземпляр обработчика.</li>
+</ul>
+<p>Подобных функций может быть сколь угодно много. Таким образом для обработки запроса будет вызываться тот <code>handler</code> чей <code>pattern</code> будет наиболее близок к значению пути в <code>url</code>.</p>
+<p>В нашей программе объявлено два <code>handler</code>&lsquo;а:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">HandleFunc</span>(<span style="color:#e6db74">&#34;/hello&#34;</span>, <span style="color:#a6e22e">handlerHello</span>)
+<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">HandleFunc</span>(<span style="color:#e6db74">&#34;/bye&#34;</span>, <span style="color:#a6e22e">handlerBye</span>)
+</code></pre></div><p>Поэтому запрос на <code>&lt;SERVER_ADDRESS&gt;:9090/hello</code> обработается <code>handlerHello</code>, а <code>handlerBye</code> возьмется за <code>&lt;SERVER_ADDRESS&gt;:9090/bye</code>.</p>
+<blockquote>
+<p>Подробнее про сопоставление пути в <code>url</code> с <code>pattern</code> читай в <a href="https://pkg.go.dev/net/http#ServeMux">документации</a> к пакету.</p>
+</blockquote>
+<h3 id="запрос---ответ">Запрос - ответ
+<span><a href="#%d0%b7%d0%b0%d0%bf%d1%80%d0%be%d1%81---%d0%be%d1%82%d0%b2%d0%b5%d1%82">#</a></span>
+</h3><p>Пробежимся по реализации <code>handlerHello()</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-golang" data-lang="golang"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">handlerHello</span>(<span style="color:#a6e22e">rw</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ResponseWriter</span>, <span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Request</span>) {
+	<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;request to /hello&#34;</span>)
+	<span style="color:#a6e22e">d</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">ioutil</span>.<span style="color:#a6e22e">ReadAll</span>(<span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">Body</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Error</span>(<span style="color:#a6e22e">rw</span>, <span style="color:#e6db74">&#34;error!&#34;</span>, <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusBadRequest</span>)
+		<span style="color:#66d9ef">return</span>
+	}
+
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Fprintf</span>(<span style="color:#a6e22e">rw</span>, <span style="color:#e6db74">&#34;Hello %s&#34;</span>, <span style="color:#a6e22e">d</span>)
+}
+</code></pre></div><ol>
+<li>Логируем поступление запроса на обработчик;</li>
+<li>Пишем в переменную <code>d</code> тело запроса;</li>
+<li>Проверяем ошибки в шаге (2). При наличии пишем в <code>rw</code>, читай отправляем клиенту, код ошибки <code>400</code> и выходим из функции;</li>
+<li>Если ошибок нет, отправляем в <code>rw</code> ответ.</li>
+</ol>
+<blockquote>
+<p>Стоит заметить, что функция <code>fmt.Fprintf()</code> принимает первым параметром интерфейс <code>w io.Writer</code>. И так как <code>http.ResponseWriter</code> реализует метод <code>Write()</code>, то мы вполне успешно можем подставить его в функцию.</p>
+</blockquote>
+<p>Запустим наш код и отправим запросы к веб-серверу:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl 127.0.0.1:9090/hello -d <span style="color:#e6db74">&#39;World&#39;</span> <span style="color:#75715e"># отправляем запрос на /hello</span>
+Hello World <span style="color:#75715e"># получаем ответ от веб-сервера</span>
+curl 127.0.0.1:9090/bye -d <span style="color:#e6db74">&#39;World&#39;</span> <span style="color:#75715e"># отправляем запрос на /bye</span>
+Bye World <span style="color:#75715e"># получаем ответ от веб-сервера</span>
+</code></pre></div><p>До встречи!</p>
+
+        </div>
+        
+
+    
+
+
+<div class="post-info">
+    
+        <div class="post-date dt-published">2022-01-08</div>
+    
+
+    <a class="post-hidden-url u-url" href="https://alebsys.github.io/posts/restapi_golang_1/">https://alebsys.github.io/posts/restapi_golang_1/</a>
+    <a href="https://alebsys.github.io/" class="p-name p-author post-hidden-author h-card" rel="me">Александр Лебедев</a>
+
+
+    <div class="post-taxonomies">
+        
+            
+                <ul class="post-tags">
+                    
+                        
+                        <li><a href="https://alebsys.github.io/tags/golang/">#golang</a></li>
+                    
+                        
+                        <li><a href="https://alebsys.github.io/tags/webserver/">#webserver</a></li>
+                    
+                </ul>
+        
+    </div>
+</div>
+
+    </article>
+
+    
+        
+    <div class="pagination post-pagination">
+        <div class="left pagination-item disabled">
+            
+        </div>
+        <div class="right pagination-item ">
+            
+                <a href="/posts/hello_2022/">Привет, 2022!</a>
+            
+        </div>
+    </div>
+
+
+
+
+    
+
+    
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "https-alebsys-github-io" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    
+
+    
+
+    
+        
+
+
+
+
+<article class="post">
+<script
+    data-isso="https://comments.example.com/"
+    data-isso-id="thread-id"
+    data-isso-css="true"
+    data-isso-lang="de"
+    data-isso-reply-to-self="true"
+    data-isso-require-author="true"
+    data-isso-require-email="true"
+    data-isso-avatar="true"
+    data-isso-avatar-bg="#f0f0f0"
+    src="https://comments.example.com/js/embed.min.js">
+</script>
+<noscript>Please enable JavaScript to view the comments powered by <a href="https://posativ.org/isso/">Isso</a>.</noscript>
+<div>
+  <section id="isso-thread"></section>
+</div>
+</article>
+
+    
+
+
+        </main>
+        
+            <footer class="common-footer">
+    
+    
+
+    <div class="common-footer-bottom">
+        
+        <div class="copyright">
+            <p>© Александр Лебедев, 2022<br>
+            Powered by <a target="_blank" rel="noopener noreferrer" href="https://gohugo.io/">Hugo</a>, theme <a target="_blank" rel="noopener noreferrer" href="https://github.com/mitrichius/hugo-theme-anubis">Anubis</a>.<br>
+            
+            </p>  
+        </div> 
+
+        
+
+    
+
+
+
+    <button class="theme-switcher">
+        Dark theme
+    </button>
+
+    <script>
+    const STORAGE_KEY = 'user-color-scheme'
+    const defaultTheme = "light"
+
+    let currentTheme
+    let switchButton
+    let autoDefinedScheme = window.matchMedia('(prefers-color-scheme: dark)')
+
+    const autoChangeScheme = e => {
+        currentTheme = e.matches ? 'dark' : 'light'
+        document.documentElement.setAttribute('data-theme', currentTheme)
+        changeButtonText()
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        switchButton = document.querySelector('.theme-switcher')
+        currentTheme = detectCurrentScheme()
+        if (currentTheme == 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark')
+        }
+        if (currentTheme == 'auto') {
+            autoChangeScheme(autoDefinedScheme);
+            autoDefinedScheme.addListener(autoChangeScheme);
+        }
+        changeButtonText()
+        switchButton.addEventListener('click', switchTheme, false)
+    })
+
+    function detectCurrentScheme() {
+        if (localStorage.getItem(STORAGE_KEY)) {
+            return localStorage.getItem(STORAGE_KEY)
+        } 
+        if (defaultTheme) {
+            return defaultTheme
+        } 
+        if (!window.matchMedia) {
+            return 'light'
+        } 
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            return 'dark'
+        }
+        return 'light'
+    }
+
+    function changeButtonText()
+    {   
+        switchButton.textContent = currentTheme == 'dark' ?  "Light theme" : "Dark theme"
+    }
+
+    function switchTheme(e) {
+        if (currentTheme == 'dark') {
+            localStorage.setItem(STORAGE_KEY, 'light')
+            document.documentElement.setAttribute('data-theme', 'light')
+            currentTheme = 'light'
+        } else {
+            localStorage.setItem(STORAGE_KEY, 'dark')
+            document.documentElement.setAttribute('data-theme', 'dark')
+            currentTheme = 'dark'
+        }
+        changeButtonText()
+    }
+    </script>
+   
+    </div>
+
+    <p class="h-card vcard">
+
+    <a href=https://alebsys.github.io/ class="p-name u-url url fn" rel="me">Александр Лебедев</a> 
+
+     
+        /
+        <a class="p-email u-email email" rel="me" href="mailto:lebedevam@gmail.com">lebedevam@gmail.com</a>
+    
+
+     
+        <img class="u-photo" src="/images/avatar.png" />
+    
+</p> 
+</footer>
+
+        
+    </div>
+</body>
+</html>

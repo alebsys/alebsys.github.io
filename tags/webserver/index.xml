@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on О технологиях и не только.</title>
-    <link>https://alebsys.github.io/posts/</link>
-    <description>О технологиях и не только. (Posts)</description>
+    <title>webserver on О технологиях и не только.</title>
+    <link>https://alebsys.github.io/tags/webserver/</link>
+    <description>О технологиях и не только. (webserver)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 08 Jan 2022 00:00:00 +0000</lastBuildDate>
     
-    <atom:link href="https://alebsys.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://alebsys.github.io/tags/webserver/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -134,19 +134,6 @@ Hello World &lt;span style=&#34;color:#75715e&#34;&gt;# получаем отв�
 curl 127.0.0.1:9090/bye -d &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;World&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;# отправляем запрос на /bye&lt;/span&gt;
 Bye World &lt;span style=&#34;color:#75715e&#34;&gt;# получаем ответ от веб-сервера&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;До встречи!&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Привет, 2022!</title>
-      <link>https://alebsys.github.io/posts/hello_2022/</link>
-      <pubDate>Mon, 03 Jan 2022 15:01:19 +0300</pubDate>
-      
-      <guid>https://alebsys.github.io/posts/hello_2022/</guid>
-      <description>&lt;p&gt;Новый год - время планов и понедельников, с которых все начинают.
-Не хочу нарушать традиций и посему открываю блог.&lt;/p&gt;
-&lt;p&gt;Обязуюсь честно продержаться пару месяцев, а там посмотрим.&lt;/p&gt;
-&lt;p&gt;Всем привет!&lt;/p&gt;
 </description>
     </item>
     

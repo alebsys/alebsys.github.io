@@ -6,10 +6,136 @@
     <description>О технологиях и не только.</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 03 Jan 2022 15:01:19 +0300</lastBuildDate>
+    <lastBuildDate>Sat, 08 Jan 2022 00:00:00 +0000</lastBuildDate>
     
     <atom:link href="https://alebsys.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>REST API на golang. Часть первая</title>
+      <link>https://alebsys.github.io/posts/restapi_golang_1/</link>
+      <pubDate>Sat, 08 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://alebsys.github.io/posts/restapi_golang_1/</guid>
+      <description>&lt;h3 id=&#34;преамбула&#34;&gt;Преамбула
+&lt;span&gt;&lt;a href=&#34;#%d0%bf%d1%80%d0%b5%d0%b0%d0%bc%d0%b1%d1%83%d0%bb%d0%b0&#34;&gt;#&lt;/a&gt;&lt;/span&gt;
+&lt;/h3&gt;&lt;p&gt;На &lt;strong&gt;YouTube&lt;/strong&gt; мне попался толковый курс &lt;a href=&#34;https://www.youtube.com/playlist?list=PLmD8u-IFdreyh6EUfevBcbiuCKzFk0EW_&#34;&gt;Building Microservices with Go&lt;/a&gt; от Nic Jackson. Параллельно с изучением буду писать небольшие заметки.&lt;/p&gt;
+&lt;h3 id=&#34;часть-первая&#34;&gt;Часть первая
+&lt;span&gt;&lt;a href=&#34;#%d1%87%d0%b0%d1%81%d1%82%d1%8c-%d0%bf%d0%b5%d1%80%d0%b2%d0%b0%d1%8f&#34;&gt;#&lt;/a&gt;&lt;/span&gt;
+&lt;/h3&gt;&lt;p&gt;В первой части познакомимся с азами &lt;a href=&#34;https://pkg.go.dev/net/http&#34;&gt;http&lt;/a&gt; пакета и построим простой, но вполне рабочий вебсервер.&lt;/p&gt;
+&lt;p&gt;Примером выступит:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-golang&#34; data-lang=&#34;golang&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;package&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;
+
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; (
+	&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;fmt&amp;#34;&lt;/span&gt;
+	&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;io/ioutil&amp;#34;&lt;/span&gt;
+	&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;log&amp;#34;&lt;/span&gt;
+	&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;net/http&amp;#34;&lt;/span&gt;
+)
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;handlerHello&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;rw&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;http&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;ResponseWriter&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;r&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;http&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Request&lt;/span&gt;) {
+	&lt;span style=&#34;color:#a6e22e&#34;&gt;log&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Println&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;request to /hello&amp;#34;&lt;/span&gt;)
+	&lt;span style=&#34;color:#a6e22e&#34;&gt;d&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;err&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;ioutil&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;ReadAll&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;r&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Body&lt;/span&gt;)
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;err&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;nil&lt;/span&gt; {
+		&lt;span style=&#34;color:#a6e22e&#34;&gt;http&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Error&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;rw&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;error!&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;http&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;StatusBadRequest&lt;/span&gt;)
+		&lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt;
+	}
+
+	&lt;span style=&#34;color:#a6e22e&#34;&gt;fmt&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Fprintf&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;rw&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Hello %s&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;d&lt;/span&gt;)
+}
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;handlerBye&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;rw&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;http&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;ResponseWriter&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;r&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;http&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Request&lt;/span&gt;) {
+	&lt;span style=&#34;color:#a6e22e&#34;&gt;log&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Println&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;request to /bye&amp;#34;&lt;/span&gt;)
+	&lt;span style=&#34;color:#a6e22e&#34;&gt;d&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;err&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;ioutil&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;ReadAll&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;r&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Body&lt;/span&gt;)
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;err&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;nil&lt;/span&gt; {
+		&lt;span style=&#34;color:#a6e22e&#34;&gt;http&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Error&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;rw&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;error!&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;http&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;StatusBadGateway&lt;/span&gt;)
+		&lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt;
+	}
+
+	&lt;span style=&#34;color:#a6e22e&#34;&gt;fmt&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Fprintf&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;rw&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Bye %s&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;d&lt;/span&gt;)
+}
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;main&lt;/span&gt;() {
+
+	&lt;span style=&#34;color:#a6e22e&#34;&gt;http&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;HandleFunc&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/hello&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;handlerHello&lt;/span&gt;)
+	&lt;span style=&#34;color:#a6e22e&#34;&gt;http&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;HandleFunc&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/bye&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;handlerBye&lt;/span&gt;)
+
+	&lt;span style=&#34;color:#a6e22e&#34;&gt;http&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;ListenAndServe&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;:9090&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;nil&lt;/span&gt;)
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Приступим.&lt;/p&gt;
+&lt;h3 id=&#34;точка-входа-listenandserve&#34;&gt;Точка входа. ListenAndServe()
+&lt;span&gt;&lt;a href=&#34;#%d1%82%d0%be%d1%87%d0%ba%d0%b0-%d0%b2%d1%85%d0%be%d0%b4%d0%b0-listenandserve&#34;&gt;#&lt;/a&gt;&lt;/span&gt;
+&lt;/h3&gt;&lt;p&gt;Начнем с определения функции:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-golang&#34; data-lang=&#34;golang&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;http&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;ListenAndServe&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;addr&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;string&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;handler&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;http&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Handler&lt;/span&gt;) &lt;span style=&#34;color:#66d9ef&#34;&gt;error&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;a href=&#34;https://pkg.go.dev/net/http@go1.17.6#Server.ListenAndServe&#34;&gt;&lt;code&gt;ListenAndServe()&lt;/code&gt;&lt;/a&gt; принимает в качестве параметров &lt;code&gt;addr&lt;/code&gt; и обработчик &lt;code&gt;handler&lt;/code&gt;, где:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;addr&lt;/code&gt; - адрес и порт которые &amp;ldquo;слушает&amp;rdquo; вебсервер;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;handler&lt;/code&gt; - обработчик, чья задача, как следует из названия, обрабатывать входящие запросы.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;В нашем случае:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-golang&#34; data-lang=&#34;golang&#34;&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;http&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;ListenAndServe&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;:9090&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;nil&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;Веб-сервер ожидает подключений на 9090 порту с любых адресов;&lt;/li&gt;
+&lt;li&gt;Конкретный &lt;code&gt;handler&lt;/code&gt; не определен (&lt;code&gt;nil&lt;/code&gt;), поэтому будет использоваться стандартный - &lt;code&gt;DefaultServeMux&lt;/code&gt;. В будущем коснемся этой темы.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;что-есть-handler&#34;&gt;Что есть Handler
+&lt;span&gt;&lt;a href=&#34;#%d1%87%d1%82%d0%be-%d0%b5%d1%81%d1%82%d1%8c-handler&#34;&gt;#&lt;/a&gt;&lt;/span&gt;
+&lt;/h3&gt;&lt;p&gt;&lt;a href=&#34;https://pkg.go.dev/net/http@go1.17.6#Handler&#34;&gt;&lt;code&gt;Handler&lt;/code&gt;&lt;/a&gt; под капотом являет собой тип &lt;code&gt;interface&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-golang&#34; data-lang=&#34;golang&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;type&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Handler&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;interface&lt;/span&gt; {
+	&lt;span style=&#34;color:#a6e22e&#34;&gt;ServeHTTP&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;ResponseWriter&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;Request&lt;/span&gt;)
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Метод &lt;code&gt;ServeHTTP()&lt;/code&gt; принимает &lt;a href=&#34;https://pkg.go.dev/net/http@go1.17.6#Request&#34;&gt;&lt;code&gt;Request&lt;/code&gt;&lt;/a&gt; (структура) и пишет ответ в &lt;a href=&#34;https://pkg.go.dev/net/http@go1.17.6#ResponseWriter&#34;&gt;&lt;code&gt;ResponseWriter&lt;/code&gt;&lt;/a&gt; (так же интерфейс).&lt;/p&gt;
+&lt;p&gt;В целом логика следующая:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;поступает новый запрос по &lt;code&gt;url&lt;/code&gt; &lt;code&gt;&amp;lt;SERVER_ADDRESS&amp;gt;:9090/hello&lt;/code&gt; ;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ListenAndServe()&lt;/code&gt; вызывает обработчик &lt;code&gt;handlerHello&lt;/code&gt;, так как путь &lt;code&gt;/hello&lt;/code&gt; совпадает с его &lt;code&gt;pattern&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;регистрация-handler&#34;&gt;Регистрация handler
+&lt;span&gt;&lt;a href=&#34;#%d1%80%d0%b5%d0%b3%d0%b8%d1%81%d1%82%d1%80%d0%b0%d1%86%d0%b8%d1%8f-handler&#34;&gt;#&lt;/a&gt;&lt;/span&gt;
+&lt;/h3&gt;&lt;p&gt;Перед использованием, следует зарегистрировать обработчик через функцию &lt;a href=&#34;https://pkg.go.dev/net/http@go1.17.6#HandleFunc&#34;&gt;&lt;code&gt;HandleFunc()&lt;/code&gt;&lt;/a&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-golang&#34; data-lang=&#34;golang&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;http&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;HandleFunc&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;pattern&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;string&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;handler&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;http&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;ResponseWriter&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;http&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Request&lt;/span&gt;))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;pattern&lt;/code&gt; - проверяет соответствие пути запроса. Подробнее в &lt;a href=&#34;https://ru.wikipedia.org/wiki/URL#%D0%A1%D1%82%D1%80%D1%83%D0%BA%D1%82%D1%83%D1%80%D0%B0_URL&#34;&gt;Wiki&lt;/a&gt;;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;handler&lt;/code&gt; - определенный экземпляр обработчика.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Подобных функций может быть сколь угодно много. Таким образом для обработки запроса будет вызываться тот &lt;code&gt;handler&lt;/code&gt; чей &lt;code&gt;pattern&lt;/code&gt; будет наиболее близок к значению пути в &lt;code&gt;url&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;В нашей программе объявлено два &lt;code&gt;handler&lt;/code&gt;&amp;lsquo;а:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-golang&#34; data-lang=&#34;golang&#34;&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;http&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;HandleFunc&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/hello&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;handlerHello&lt;/span&gt;)
+&lt;span style=&#34;color:#a6e22e&#34;&gt;http&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;HandleFunc&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/bye&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;handlerBye&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Поэтому запрос на &lt;code&gt;&amp;lt;SERVER_ADDRESS&amp;gt;:9090/hello&lt;/code&gt; обработается &lt;code&gt;handlerHello&lt;/code&gt;, а &lt;code&gt;handlerBye&lt;/code&gt; возьмется за &lt;code&gt;&amp;lt;SERVER_ADDRESS&amp;gt;:9090/bye&lt;/code&gt;.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Подробнее про сопоставление пути в &lt;code&gt;url&lt;/code&gt; с &lt;code&gt;pattern&lt;/code&gt; читай в &lt;a href=&#34;https://pkg.go.dev/net/http#ServeMux&#34;&gt;документации&lt;/a&gt; к пакету.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;запрос---ответ&#34;&gt;Запрос - ответ
+&lt;span&gt;&lt;a href=&#34;#%d0%b7%d0%b0%d0%bf%d1%80%d0%be%d1%81---%d0%be%d1%82%d0%b2%d0%b5%d1%82&#34;&gt;#&lt;/a&gt;&lt;/span&gt;
+&lt;/h3&gt;&lt;p&gt;Пробежимся по реализации &lt;code&gt;handlerHello()&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-golang&#34; data-lang=&#34;golang&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;handlerHello&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;rw&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;http&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;ResponseWriter&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;r&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;http&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Request&lt;/span&gt;) {
+	&lt;span style=&#34;color:#a6e22e&#34;&gt;log&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Println&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;request to /hello&amp;#34;&lt;/span&gt;)
+	&lt;span style=&#34;color:#a6e22e&#34;&gt;d&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;err&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;ioutil&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;ReadAll&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;r&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Body&lt;/span&gt;)
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;err&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;nil&lt;/span&gt; {
+		&lt;span style=&#34;color:#a6e22e&#34;&gt;http&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Error&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;rw&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;error!&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;http&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;StatusBadRequest&lt;/span&gt;)
+		&lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt;
+	}
+
+	&lt;span style=&#34;color:#a6e22e&#34;&gt;fmt&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Fprintf&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;rw&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Hello %s&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;d&lt;/span&gt;)
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol&gt;
+&lt;li&gt;Логируем поступление запроса на обработчик;&lt;/li&gt;
+&lt;li&gt;Пишем в переменную &lt;code&gt;d&lt;/code&gt; тело запроса;&lt;/li&gt;
+&lt;li&gt;Проверяем ошибки в шаге (2). При наличии пишем в &lt;code&gt;rw&lt;/code&gt;, читай отправляем клиенту, код ошибки &lt;code&gt;400&lt;/code&gt; и выходим из функции;&lt;/li&gt;
+&lt;li&gt;Если ошибок нет, отправляем в &lt;code&gt;rw&lt;/code&gt; ответ.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Стоит заметить, что функция &lt;code&gt;fmt.Fprintf()&lt;/code&gt; принимает первым параметром интерфейс &lt;code&gt;w io.Writer&lt;/code&gt;. И так как &lt;code&gt;http.ResponseWriter&lt;/code&gt; реализует метод &lt;code&gt;Write()&lt;/code&gt;, то мы вполне успешно можем подставить его в функцию.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Запустим наш код и отправим запросы к веб-серверу:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;curl 127.0.0.1:9090/hello -d &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;World&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;# отправляем запрос на /hello&lt;/span&gt;
+Hello World &lt;span style=&#34;color:#75715e&#34;&gt;# получаем ответ от веб-сервера&lt;/span&gt;
+curl 127.0.0.1:9090/bye -d &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;World&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;# отправляем запрос на /bye&lt;/span&gt;
+Bye World &lt;span style=&#34;color:#75715e&#34;&gt;# получаем ответ от веб-сервера&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;До встречи!&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Обо мне</title>
