@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Блог о технологиях</title>
+    <title>Posts on О технологиях и не только.</title>
     <link>https://alebsys.github.io/posts/</link>
-    <description>Блог о технологиях (Posts)</description>
+    <description>О технологиях и не только. (Posts)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 03 Jan 2022 15:01:19 +0300</lastBuildDate>
