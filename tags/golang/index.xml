@@ -6,10 +6,114 @@
     <description>О технологиях и не только (golang)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 08 Jan 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 30 Jan 2022 00:00:00 +0000</lastBuildDate>
     
     <atom:link href="https://alebsys.github.io/tags/golang/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Именование объектов. Golang</title>
+      <link>https://alebsys.github.io/posts/go_naming/</link>
+      <pubDate>Sun, 30 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://alebsys.github.io/posts/go_naming/</guid>
+      <description>&lt;p&gt;Конспект &lt;a href=&#34;https://dave.cheney.net/practical-go/presentations/qcon-china.html&#34;&gt;статьи&lt;/a&gt; от Dave Cheney посвященный рекомендациям по именованию объектов.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Слабый нейминг есть симптом слабого дизайна - Dave Cheney&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;или еще вот:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Хороший нейминг как хорошая шутка. Если приходится объяснять, то уже не смешно — Dave Cheney&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Хорошо если нейминг:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;лаконичный, но краткость не вредит ясности;&lt;/li&gt;
+&lt;li&gt;описывает результат функции, а не ее реализацию;&lt;/li&gt;
+&lt;li&gt;позволяет без труда предугадать как и где объект используется.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;краткость-vs-ясность&#34;&gt;Краткость vs ясность
+&lt;span&gt;&lt;a href=&#34;#%d0%ba%d1%80%d0%b0%d1%82%d0%ba%d0%be%d1%81%d1%82%d1%8c-vs-%d1%8f%d1%81%d0%bd%d0%be%d1%81%d1%82%d1%8c&#34;&gt;#&lt;/a&gt;&lt;/span&gt;
+&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;Чем больше разнесены в коде объявление и использование объекта, тем более длинным должно быть его имя - Andrew Gerrand&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Подходы, которых следует придерживаться:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Короткие имена назначаюся если расстояние между объявлением и крайним использованием объекта минимально, например в цикле;&lt;/li&gt;
+&lt;li&gt;Использование длинного нейминга должно быть целесообразно;&lt;/li&gt;
+&lt;li&gt;Не включать в имя тип объекта - врядли он сгладит плохой нейминг;&lt;/li&gt;
+&lt;li&gt;Имя константы описывает значение, но не как его использовать;&lt;/li&gt;
+&lt;li&gt;Односимвольные имена внутри циклов;&lt;/li&gt;
+&lt;li&gt;В одно слово для параметров и возвращаемых значений функций, методов, интерфейсов и пакетов;&lt;/li&gt;
+&lt;li&gt;Многословные для названий функций и объявлений на уровне пакетов;&lt;/li&gt;
+&lt;li&gt;Название пакета так же является частью нейминга вызываемого объекта, используй это;&lt;/li&gt;
+&lt;li&gt;Не смешивать короткие и длинные имена в одном объявлении.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Пример:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-golang&#34; data-lang=&#34;golang&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;type&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Person&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;struct&lt;/span&gt; {
+	&lt;span style=&#34;color:#a6e22e&#34;&gt;Name&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;string&lt;/span&gt;
+	&lt;span style=&#34;color:#a6e22e&#34;&gt;Age&lt;/span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;
+}
+
+&lt;span style=&#34;color:#75715e&#34;&gt;// AverageAge returns the average age of people.
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;AverageAge&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;people&lt;/span&gt; []&lt;span style=&#34;color:#a6e22e&#34;&gt;Person&lt;/span&gt;) &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; {
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; len(&lt;span style=&#34;color:#a6e22e&#34;&gt;people&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; {
+		&lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+	}
+
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;count&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;sum&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;_&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;p&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;range&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;people&lt;/span&gt; {
+		&lt;span style=&#34;color:#a6e22e&#34;&gt;sum&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;p&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Age&lt;/span&gt;
+		&lt;span style=&#34;color:#a6e22e&#34;&gt;count&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+	}
+
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;sum&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;count&lt;/span&gt;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;p&lt;/code&gt; - объявляется и используется в соседний строчках;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;people&lt;/code&gt;, &lt;code&gt;count&lt;/code&gt;, &lt;code&gt;sum&lt;/code&gt; - объявляется и затем многократно используется;
+&lt;ul&gt;
+&lt;li&gt;если заменить &lt;code&gt;count&lt;/code&gt; на &lt;code&gt;c&lt;/code&gt; и &lt;code&gt;sum&lt;/code&gt; на &lt;code&gt;s&lt;/code&gt;, то это автоматически вынудит переименовать все переменные в программе. Врядли это добавит ясности.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Используй разделение кода пустыми строками так же как разделяется текст на абзацы. Каждый из них являет собой единое смысл, действие&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;использование-единообразных-имен&#34;&gt;Использование единообразных имен
+&lt;span&gt;&lt;a href=&#34;#%d0%b8%d1%81%d0%bf%d0%be%d0%bb%d1%8c%d0%b7%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d0%b5-%d0%b5%d0%b4%d0%b8%d0%bd%d0%be%d0%be%d0%b1%d1%80%d0%b0%d0%b7%d0%bd%d1%8b%d1%85-%d0%b8%d0%bc%d0%b5%d0%bd&#34;&gt;#&lt;/a&gt;&lt;/span&gt;
+&lt;/h3&gt;&lt;p&gt;Имя объекта должно быть предсказуемым. Встречая его в первый раз, читатель должен понять его смысл.&lt;/p&gt;
+&lt;p&gt;Если далее по коду он встретит аналогичное имя, должна быть уверенность, что смысл объекта остался прежним.&lt;/p&gt;
+&lt;p&gt;Вместо  &lt;code&gt;d *sql.DB&lt;/code&gt;, &lt;code&gt;dbase *sql.DB&lt;/code&gt;, &lt;code&gt;DB *sql.DB&lt;/code&gt; обозначающих одно и тоже стоит выбрать единый, например &lt;code&gt;db *sql.DB&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Тоже самое валидно и для получателей значений из функций и методов.&lt;/p&gt;
+&lt;p&gt;Традиционно односимвольные имена используются в циклах, где:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;i&lt;/code&gt; (&lt;code&gt;j&lt;/code&gt;) - индекс в цикле, j используется для вложенных циклов;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;k&lt;/code&gt;, &lt;code&gt;v&lt;/code&gt; - ключ/значение в map;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;n&lt;/code&gt; часто ассоциируется со счетчиком (возврастает);&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;s&lt;/code&gt; для обозначения string.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Таким образом читатель встретив &lt;code&gt;i&lt;/code&gt; или &lt;code&gt;j&lt;/code&gt; будет предполагать, что он находится в цикле.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Если ты очнулся обложенным кучей &lt;code&gt;i&lt;/code&gt; и &lt;code&gt;j&lt;/code&gt;, то самое время задуматься над вынесеннием функционала в отдельные модули&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;варианты-объявления-переменных&#34;&gt;Варианты объявления переменных
+&lt;span&gt;&lt;a href=&#34;#%d0%b2%d0%b0%d1%80%d0%b8%d0%b0%d0%bd%d1%82%d1%8b-%d0%be%d0%b1%d1%8a%d1%8f%d0%b2%d0%bb%d0%b5%d0%bd%d0%b8%d1%8f-%d0%bf%d0%b5%d1%80%d0%b5%d0%bc%d0%b5%d0%bd%d0%bd%d1%8b%d1%85&#34;&gt;#&lt;/a&gt;&lt;/span&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Когда переменная дикларируется без инициализации (будет сделано позже), используй var:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-golang&#34; data-lang=&#34;golang&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;players&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// 0
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;things&lt;/span&gt; []&lt;span style=&#34;color:#a6e22e&#34;&gt;Thing&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;// an empty slice of Things
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;thing&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Thing&lt;/span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// empty Thing struct
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;json&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;Unmarshall&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;reader&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;thing&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Когда требуется в том числе и явная инициализация - используй &lt;code&gt;:=&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>REST API на golang. Часть первая</title>
