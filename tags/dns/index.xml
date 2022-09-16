@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>dns on О технологиях и не только</title>
+    <link>https://alebsys.github.io/tags/dns/</link>
+    <description>О технологиях и не только (dns)</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 14 Sep 2022 00:00:00 +0000</lastBuildDate>
+    
+    <atom:link href="https://alebsys.github.io/tags/dns/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Resolve DNS записей в k8s</title>
+      <link>https://alebsys.github.io/posts/kube-dns-resolve/</link>
+      <pubDate>Wed, 14 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://alebsys.github.io/posts/kube-dns-resolve/</guid>
+      <description>&lt;h3 id=&#34;дано&#34;&gt;Дано
+&lt;span&gt;&lt;a href=&#34;#%d0%b4%d0%b0%d0%bd%d0%be&#34;&gt;#&lt;/a&gt;&lt;/span&gt;
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;Развернутый coreDNS в кластере;&lt;/li&gt;
+&lt;li&gt;Внешний по отношению к k8s DNS сервер, далее WinDNS;&lt;/li&gt;
+&lt;li&gt;Произвольный Под в кластере из которого пойдет DNS-запрос.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;про-coredns&#34;&gt;Про CoreDNS
+&lt;span&gt;&lt;a href=&#34;#%d0%bf%d1%80%d0%be-coredns&#34;&gt;#&lt;/a&gt;&lt;/span&gt;
+&lt;/h3&gt;&lt;p&gt;&lt;a href=&#34;https://coredns.io/&#34;&gt;CoreDNS&lt;/a&gt; представляет собой написанный на Go DNS-сервер, использующийся для Service Discovery в кластере.&lt;/p&gt;
+&lt;p&gt;Сервис модульный, в связи с чем весь функционал вынесен в отдельные плагины.
+В данном тексте сосредоточимся на &lt;a href=&#34;https://coredns.io/plugins/kubernetes/&#34;&gt;&lt;code&gt;kubernetes&lt;/code&gt;&lt;/a&gt; и &lt;a href=&#34;https://coredns.io/plugins/forward/&#34;&gt;&lt;code&gt;forward&lt;/code&gt;&lt;/a&gt; плагинах:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;.:53 {
+    ...
+    kubernetes cluster.local in-addr.arpa ip6.arpa {
+       pods insecure
+       fallthrough in-addr.arpa ip6.arpa
+       ttl 30
+    }
+    ...
+    forward . /etc/resolv.conf {
+       max_concurrent 1000
+    }
+    ...
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;CoreDNS&lt;/strong&gt; отвечает за кубовую зону &lt;code&gt;cluster.local&lt;/code&gt;.
+Для резолва остальных доменов задействован плагин &lt;code&gt;forward&lt;/code&gt;, конфигурация подтягивается из &lt;code&gt;/etc/resolv.conf&lt;/code&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;про-dnspolicy&#34;&gt;Про &lt;code&gt;dnsPolicy&lt;/code&gt;
+&lt;span&gt;&lt;a href=&#34;#%d0%bf%d1%80%d0%be-dnspolicy&#34;&gt;#&lt;/a&gt;&lt;/span&gt;
+&lt;/h3&gt;&lt;p&gt;Kubernetes позволяет на уровне Пода задавать &lt;a href=&#34;https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-s-dns-policy&#34;&gt;&lt;code&gt;dnsPolicy&lt;/code&gt;&lt;/a&gt;, определяя настройку DNS.&lt;/p&gt;
+&lt;p&gt;По умолчанию &lt;code&gt;dnsPolicy&lt;/code&gt; выставляется в значение &lt;code&gt;ClusterFirst&lt;/code&gt; - записывает в &lt;code&gt;/etc/resolv.conf&lt;/code&gt; данные о &lt;code&gt;kube-dns&lt;/code&gt; сервисе:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;search namespace.svc.cluster.local svc.cluster.local cluster.local
+nameserver 10.96.0.10
+options ndots:5
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Для Подов с &lt;strong&gt;CoreDNS&lt;/strong&gt; на борту требуется другая настройка, ибо он должен знать куда обращаться при разрешении доменов сторонних (не &lt;code&gt;cluster.local&lt;/code&gt;) зон.&lt;/p&gt;
+&lt;p&gt;Его настройка — &lt;code&gt;dnsPolicy: Default&lt;/code&gt;, то есть в Под подтягивается &lt;code&gt;/etc/resolv.conf&lt;/code&gt; хостовой машины:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;nameserver 10.96.124.1
+nameserver 10.96.124.2
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;про-ndots-и-fqdn&#34;&gt;Про &lt;code&gt;ndots&lt;/code&gt; и FQDN
+&lt;span&gt;&lt;a href=&#34;#%d0%bf%d1%80%d0%be-ndots-%d0%b8-fqdn&#34;&gt;#&lt;/a&gt;&lt;/span&gt;
+&lt;/h3&gt;&lt;p&gt;&lt;a href=&#34;https://ru.wikipedia.org/wiki/FQDN&#34;&gt;&lt;strong&gt;FQDN&lt;/strong&gt;&lt;/a&gt; (Fully Qualified Domain Name) считается таковым если на конце присутствует &lt;code&gt;.&lt;/code&gt; . К примеру &lt;code&gt;example.com&lt;/code&gt; не является &lt;strong&gt;FQDN&lt;/strong&gt;, когда как &lt;code&gt;example.com.&lt;/code&gt; уже полноправный FQDN.&lt;/p&gt;
+&lt;p&gt;Параметр &lt;code&gt;ndots&lt;/code&gt; определяет сколько в доменном имени должно присутствовать &lt;code&gt;.&lt;/code&gt; чтобы оно резолвилось как &lt;strong&gt;FQDN&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Т.о. если на конце доменного имени нет &lt;code&gt;.&lt;/code&gt; и/или всего &lt;code&gt;.&lt;/code&gt; меньше чем значение &lt;code&gt;ndots&lt;/code&gt;, то в начале будут последовательно резолвиться &lt;code&gt;доменное имя + суффикс&lt;/code&gt; из секции &lt;code&gt;search&lt;/code&gt; и только в конце домен как есть.&lt;/p&gt;
+&lt;p&gt;Таким образом обеспечивается &lt;strong&gt;service discovery&lt;/strong&gt; в кластере &lt;strong&gt;k8s&lt;/strong&gt;, хотя и ценной более частых “промахов”.&lt;/p&gt;
+&lt;h4 id=&#34;пример&#34;&gt;Пример
+&lt;span&gt;&lt;a href=&#34;#%d0%bf%d1%80%d0%b8%d0%bc%d0%b5%d1%80&#34;&gt;#&lt;/a&gt;&lt;/span&gt;
+&lt;/h4&gt;&lt;p&gt;Запустим в одном из Подов команду &lt;code&gt;dig example.com&lt;/code&gt;, будут сгенерированы следующие пакеты:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;попытка резолва &lt;code&gt;example.com.namespace.svc.cluster.local&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;// 192.168.210.138 адрес Пода, 192.168.48.45 адрес Пода с CoreDNS
+192.168.210.138 192.168.48.45 DNS 134 Standard query 0x28a9 A example.com.namespace.svc.cluster.local
+192.168.48.45 192.168.210.138 DNS 227 Standard query response 0x28a9 No such name A example.com.namespace.svc.cluster.local SOA ns.dns.cluster.local
+&lt;/code&gt;&lt;/pre&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;попытка резолва &lt;code&gt;example.com.svc.cluster.local&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;192.168.210.138 192.168.48.45 DNS 112 Standard query 0xe1f7 A example.com.svc.cluster.local
+192.168.48.45 192.168.210.138 DNS 205 Standard query response 0xe1f7 No such name A example.com.svc.cluster.local SOA ns.dns.cluster.local
+&lt;/code&gt;&lt;/pre&gt;&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;попытка резолва &lt;code&gt;example.com.cluster.local&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;192.168.210.138 192.168.80.33 DNS 108 Standard query 0x6f64 A example.com.cluster.local
+192.168.80.33 192.168.210.138 DNS 201 Standard query response 0x6f64 No such name A example.com.cluster.local SOA ns.dns.cluster.local
+&lt;/code&gt;&lt;/pre&gt;&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;попытка резолва &lt;code&gt;example.com&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;192.168.210.138 192.168.48.45 DNS 94 Standard query 0x9822 A example.com
+// CoreDNS в соотвествии с плагином forward перенаправляет запрос в WinDNS 
+// 10.96.70.12 - машиша с CoreDNS Подом на борту 
+// 10.96.124.1 - машина с WinDNS
+10.96.70.10 10.96.124.1 DNS 85 Standard query 0x3ffb A example.com OPT
+10.96.124.1 10.96.70.10 DNS 101 Standard query response 0x3ffb A example.com A 93.184.216.34 OPT
+// Отправка ответа целевому Поду от CoreDNS
+192.168.48.45 192.168.210.138 DNS 124 Standard query response 0x9822 A example.com A 93.184.216.34
+Таким образом для финального резолва нам потребовалось только на стороне DNS-клиента отправить 4 запроса, когда как всего было сгенерировано 10.
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Визуализируем весь процесс:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://alebsys.github.io/images/kube-dns-resolve-path.png&#34; alt=&#34;Цепочка dns запросов&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;кастомизация-resolvconf&#34;&gt;Кастомизация &lt;code&gt;resolv.conf&lt;/code&gt;
+&lt;span&gt;&lt;a href=&#34;#%d0%ba%d0%b0%d1%81%d1%82%d0%be%d0%bc%d0%b8%d0%b7%d0%b0%d1%86%d0%b8%d1%8f-resolvconf&#34;&gt;#&lt;/a&gt;&lt;/span&gt;
+&lt;/h3&gt;&lt;p&gt;Директива &lt;code&gt;dnsConfig&lt;/code&gt; на уровне Пода позволяет переопределять файл &lt;code&gt;resolv.conf&lt;/code&gt;, меняя такие параметры как адреса &lt;code&gt;nameserver&lt;/code&gt;’ов, величину &lt;code&gt;ndots&lt;/code&gt;, суффиксы &lt;code&gt;search&lt;/code&gt; и подобное. Больше подробностей в &lt;a href=&#34;https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-dns-config&#34;&gt;документации&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

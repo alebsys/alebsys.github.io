@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+
+
+<html lang="en-us" data-theme="">
+<head>
+    
+        
+<meta charset="utf-8">
+<meta name="HandheldFriendly" content="True">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+
+<title>Именование объектов. Golang - О технологиях и не только</title>
+
+<meta name="description" content="Подходы в выборе нейминга.">
+
+
+
+<link rel="icon" type="image/x-icon" href="https://alebsys.github.io/favicon.ico">
+<link rel="apple-touch-icon-precomposed" href="https://alebsys.github.io/favicon.png">
+
+
+
+    
+
+
+
+
+
+    
+    
+        
+    
+    
+
+    
+        <link rel="stylesheet" href="https://alebsys.github.io/css/style.min.fd95df255d735d1bbbe9d010ac1dbb4c1867757afcdf7106e6de20cb79789590.css" integrity="sha256-/ZXfJV1zXRu76dAQrB27TBhndXr833EG5t4gy3l4lZA=">
+    
+
+
+
+
+
+
+<meta property="og:title" content="Именование объектов. Golang" />
+<meta property="og:description" content="Подходы в выборе нейминга." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://alebsys.github.io/posts/go_naming/" /><meta property="og:image" content="https://alebsys.github.io/images/avatar.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-01-30T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-01-30T00:00:00+00:00" />
+
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://alebsys.github.io/images/avatar.png"/>
+
+<meta name="twitter:title" content="Именование объектов. Golang"/>
+<meta name="twitter:description" content="Подходы в выборе нейминга."/>
+
+
+
+    
+        <link rel="webmention" href="https://webmention.io/hugo-theme-anubis/webmention" />
+        
+            <link rel="pingback" href="https://webmention.io/hugo-theme-anubis/xmlrpc" />
+        
+    
+    
+        <link rel="webmention" href="https://yourdomain.com/webemntions/receive" />
+    
+
+
+
+
+
+
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VDR541GTVE"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-VDR541GTVE', { 'anonymize_ip': false });
+}
+</script>
+
+
+
+
+
+    
+</head>
+<body>
+    <a class="skip-main" href="#main">Skip to main content</a>
+    <div class="container">
+        <header class="common-header"> 
+            
+                <div class="header-top">
+    <h1 class="site-title">
+        <a href="/">О технологиях и не только</a>
+    </h1>
+    <ul class="social-icons">
+
+
+    
+        
+        
+        <li>
+            <a href="https://github.com/alebsys" title="Github" rel="me">
+            <span class="inline-svg" >
+
+
+
+
+    
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+
+</span>
+
+            </a>
+        </li>
+    
+
+    
+        
+        
+        <li>
+            <a href="tg://resolve?domain=alebsys" title="Telegram" rel="me">
+            <span class="inline-svg" >
+
+
+
+
+    
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path fill="currentColor" d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm121.8 169.9l-40.7 191.8c-3 13.6-11.1 16.9-22.4 10.5l-62-45.7-29.9 28.8c-3.3 3.3-6.1 6.1-12.5 6.1l4.4-63.1 114.9-103.8c5-4.4-1.1-6.9-7.7-2.5l-142 89.4-61.2-19.1c-13.3-4.2-13.6-13.3 2.8-19.7l239.1-92.2c11.1-4 20.8 2.7 17.2 19.5z"/></svg>
+
+</span>
+
+            </a>
+        </li>
+    
+
+    
+        
+        
+        <li>
+            <a href="https://www.linkedin.com/in/александр-лебедев-33b9811a7" title="Linkedin" rel="me">
+            <span class="inline-svg" >
+
+
+
+
+    
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+
+</span>
+
+            </a>
+        </li>
+    
+
+</ul>
+
+</div>
+
+    <nav>
+        
+        
+        <a class="" href="https://alebsys.github.io/about/" title="About">About</a>
+        
+        <a class="" href="https://alebsys.github.io/posts/" title="Archive">Archive</a>
+        
+    </nav>
+
+
+
+
+            
+        </header>
+        <main id="main" tabindex="-1"> 
+            
+    
+
+    <article class="post h-entry">
+        <div class="post-header">
+            <header>
+                <h1 class="p-name post-title">Именование объектов. Golang</h1>
+
+                
+            </header>
+        </div>
+        <div class="content e-content">
+            <p>Конспект <a href="https://dave.cheney.net/practical-go/presentations/qcon-china.html">статьи</a> от Dave Cheney посвященный рекомендациям по именованию объектов.</p>
+<blockquote>
+<p>Слабый нейминг есть симптом слабого дизайна - Dave Cheney</p>
+</blockquote>
+<p>или еще вот:</p>
+<blockquote>
+<p>Хороший нейминг как хорошая шутка. Если приходится объяснять, то уже не смешно — Dave Cheney</p>
+</blockquote>
+<p>Хорошо если нейминг:</p>
+<ul>
+<li>лаконичный, но краткость не вредит ясности;</li>
+<li>описывает результат функции, а не ее реализацию;</li>
+<li>позволяет без труда предугадать как и где объект используется.</li>
+</ul>
+<h3 id="краткость-vs-ясность">Краткость vs ясность
+<span><a href="#%d0%ba%d1%80%d0%b0%d1%82%d0%ba%d0%be%d1%81%d1%82%d1%8c-vs-%d1%8f%d1%81%d0%bd%d0%be%d1%81%d1%82%d1%8c">#</a></span>
+</h3><blockquote>
+<p>Чем больше разнесены в коде объявление и использование объекта, тем более длинным должно быть его имя - Andrew Gerrand</p>
+</blockquote>
+<p>Подходы, которых следует придерживаться:</p>
+<ul>
+<li>Короткие имена назначаюся если расстояние между объявлением и крайним использованием объекта минимально, например в цикле;</li>
+<li>Использование длинного нейминга должно быть целесообразно;</li>
+<li>Не включать в имя тип объекта - врядли он сгладит плохой нейминг;</li>
+<li>Имя константы описывает значение, но не как его использовать;</li>
+<li>Односимвольные имена внутри циклов;</li>
+<li>В одно слово для параметров и возвращаемых значений функций, методов, интерфейсов и пакетов;</li>
+<li>Многословные для названий функций и объявлений на уровне пакетов;</li>
+<li>Название пакета так же является частью нейминга вызываемого объекта, используй это;</li>
+<li>Не смешивать короткие и длинные имена в одном объявлении.</li>
+</ul>
+<p>Пример:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Person</span> <span style="color:#66d9ef">struct</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Name</span> <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">Age</span>  <span style="color:#66d9ef">int</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// AverageAge returns the average age of people.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">AverageAge</span>(<span style="color:#a6e22e">people</span> []<span style="color:#a6e22e">Person</span>) <span style="color:#66d9ef">int</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> len(<span style="color:#a6e22e">people</span>) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">count</span>, <span style="color:#a6e22e">sum</span> <span style="color:#66d9ef">int</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">p</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">people</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">sum</span> <span style="color:#f92672">+=</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">Age</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">count</span> <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">sum</span> <span style="color:#f92672">/</span> <span style="color:#a6e22e">count</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><code>p</code> - объявляется и используется в соседний строчках;</li>
+<li><code>people</code>, <code>count</code>, <code>sum</code> - объявляется и затем многократно используется;
+<ul>
+<li>если заменить <code>count</code> на <code>c</code> и <code>sum</code> на <code>s</code>, то это автоматически вынудит переименовать все переменные в программе. Врядли это добавит ясности.</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Используй разделение кода пустыми строками так же как разделяется текст на абзацы. Каждый из них являет собой единое смысл, действие</p>
+</blockquote>
+<h3 id="использование-единообразных-имен">Использование единообразных имен
+<span><a href="#%d0%b8%d1%81%d0%bf%d0%be%d0%bb%d1%8c%d0%b7%d0%be%d0%b2%d0%b0%d0%bd%d0%b8%d0%b5-%d0%b5%d0%b4%d0%b8%d0%bd%d0%be%d0%be%d0%b1%d1%80%d0%b0%d0%b7%d0%bd%d1%8b%d1%85-%d0%b8%d0%bc%d0%b5%d0%bd">#</a></span>
+</h3><p>Имя объекта должно быть предсказуемым. Встречая его в первый раз, читатель должен понять его смысл.</p>
+<p>Если далее по коду он встретит аналогичное имя, должна быть уверенность, что смысл объекта остался прежним.</p>
+<p>Вместо  <code>d *sql.DB</code>, <code>dbase *sql.DB</code>, <code>DB *sql.DB</code> обозначающих одно и тоже стоит выбрать единый, например <code>db *sql.DB</code>.</p>
+<p>Тоже самое валидно и для получателей значений из функций и методов.</p>
+<p>Традиционно односимвольные имена используются в циклах, где:</p>
+<ul>
+<li><code>i</code> (<code>j</code>) - индекс в цикле, j используется для вложенных циклов;</li>
+<li><code>k</code>, <code>v</code> - ключ/значение в map;</li>
+<li><code>n</code> часто ассоциируется со счетчиком (возврастает);</li>
+<li><code>s</code> для обозначения string.</li>
+</ul>
+<p>Таким образом читатель встретив <code>i</code> или <code>j</code> будет предполагать, что он находится в цикле.</p>
+<blockquote>
+<p>Если ты очнулся обложенным кучей <code>i</code> и <code>j</code>, то самое время задуматься над вынесеннием функционала в отдельные модули</p>
+</blockquote>
+<h3 id="варианты-объявления-переменных">Варианты объявления переменных
+<span><a href="#%d0%b2%d0%b0%d1%80%d0%b8%d0%b0%d0%bd%d1%82%d1%8b-%d0%be%d0%b1%d1%8a%d1%8f%d0%b2%d0%bb%d0%b5%d0%bd%d0%b8%d1%8f-%d0%bf%d0%b5%d1%80%d0%b5%d0%bc%d0%b5%d0%bd%d0%bd%d1%8b%d1%85">#</a></span>
+</h3><ul>
+<li>
+<p>Когда переменная дикларируется без инициализации (будет сделано позже), используй var:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-golang" data-lang="golang"><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">players</span> <span style="color:#66d9ef">int</span>    <span style="color:#75715e">// 0
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">things</span> []<span style="color:#a6e22e">Thing</span> <span style="color:#75715e">// an empty slice of Things
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">thing</span> <span style="color:#a6e22e">Thing</span>    <span style="color:#75715e">// empty Thing struct
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">json</span>.<span style="color:#a6e22e">Unmarshall</span>(<span style="color:#a6e22e">reader</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">thing</span>)
+</span></span></code></pre></div></li>
+<li>
+<p>Когда требуется в том числе и явная инициализация - используй <code>:=</code></p>
+</li>
+</ul>
+
+        </div>
+        
+
+    
+
+
+<div class="post-info">
+    
+        <div class="post-date dt-published">2022-01-30</div>
+    
+
+    <a class="post-hidden-url u-url" href="https://alebsys.github.io/posts/go_naming/">https://alebsys.github.io/posts/go_naming/</a>
+    <a href="https://alebsys.github.io/" class="p-name p-author post-hidden-author h-card" rel="me">Александр Лебедев</a>
+
+
+    <div class="post-taxonomies">
+        
+            
+                <ul class="post-tags">
+                    
+                        
+                        <li><a href="https://alebsys.github.io/tags/golang/">#golang</a></li>
+                    
+                        
+                        <li><a href="">#code style</a></li>
+                    
+                </ul>
+        
+    </div>
+</div>
+
+    </article>
+
+    
+        
+    <div class="pagination post-pagination">
+        <div class="left pagination-item ">
+            
+                <a href="/posts/kube-dns-resolve/">Resolve DNS записей в k8s</a>
+            
+        </div>
+        <div class="right pagination-item ">
+            
+                <a href="/posts/restapi_golang_1/">REST API на golang. Часть первая</a>
+            
+        </div>
+    </div>
+
+
+
+
+    
+
+    
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "https-alebsys-github-io" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    
+
+    
+
+    
+        
+
+
+
+
+<article class="post">
+<script
+    data-isso="https://comments.example.com/"
+    data-isso-id="thread-id"
+    data-isso-css="true"
+    data-isso-lang="de"
+    data-isso-reply-to-self="true"
+    data-isso-require-author="true"
+    data-isso-require-email="true"
+    data-isso-avatar="true"
+    data-isso-avatar-bg="#f0f0f0"
+    src="https://comments.example.com/js/embed.min.js">
+</script>
+<noscript>Please enable JavaScript to view the comments powered by <a href="https://posativ.org/isso/">Isso</a>.</noscript>
+<div>
+  <section id="isso-thread"></section>
+</div>
+</article>
+
+    
+
+
+        </main>
+        
+            <footer class="common-footer">
+    
+    
+
+    <div class="common-footer-bottom">
+        
+        <div class="copyright">
+            <p>© Александр Лебедев, 2022<br>
+            Powered by <a target="_blank" rel="noopener noreferrer" href="https://gohugo.io/">Hugo</a>, theme <a target="_blank" rel="noopener noreferrer" href="https://github.com/mitrichius/hugo-theme-anubis">Anubis</a>.<br>
+            
+            </p>  
+        </div> 
+
+        
+
+    
+
+
+
+    <button class="theme-switcher">
+        Dark theme
+    </button>
+
+    <script>
+    const STORAGE_KEY = 'user-color-scheme'
+    const defaultTheme = "light"
+
+    let currentTheme
+    let switchButton
+    let autoDefinedScheme = window.matchMedia('(prefers-color-scheme: dark)')
+
+    const autoChangeScheme = e => {
+        currentTheme = e.matches ? 'dark' : 'light'
+        document.documentElement.setAttribute('data-theme', currentTheme)
+        changeButtonText()
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        switchButton = document.querySelector('.theme-switcher')
+        currentTheme = detectCurrentScheme()
+        if (currentTheme == 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark')
+        }
+        if (currentTheme == 'auto') {
+            autoChangeScheme(autoDefinedScheme);
+            autoDefinedScheme.addListener(autoChangeScheme);
+        }
+        changeButtonText()
+        switchButton.addEventListener('click', switchTheme, false)
+    })
+
+    function detectCurrentScheme() {
+        if (localStorage.getItem(STORAGE_KEY)) {
+            return localStorage.getItem(STORAGE_KEY)
+        } 
+        if (defaultTheme) {
+            return defaultTheme
+        } 
+        if (!window.matchMedia) {
+            return 'light'
+        } 
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            return 'dark'
+        }
+        return 'light'
+    }
+
+    function changeButtonText()
+    {   
+        switchButton.textContent = currentTheme == 'dark' ?  "Light theme" : "Dark theme"
+    }
+
+    function switchTheme(e) {
+        if (currentTheme == 'dark') {
+            localStorage.setItem(STORAGE_KEY, 'light')
+            document.documentElement.setAttribute('data-theme', 'light')
+            currentTheme = 'light'
+        } else {
+            localStorage.setItem(STORAGE_KEY, 'dark')
+            document.documentElement.setAttribute('data-theme', 'dark')
+            currentTheme = 'dark'
+        }
+        changeButtonText()
+    }
+    </script>
+   
+    </div>
+
+    <p class="h-card vcard">
+
+    <a href=https://alebsys.github.io/ class="p-name u-url url fn" rel="me">Александр Лебедев</a> 
+
+     
+        /
+        <a class="p-email u-email email" rel="me" href="mailto:lebedevam@gmail.com">lebedevam@gmail.com</a>
+    
+
+     
+        <img class="u-photo" src="/images/avatar.png" />
+    
+</p> 
+</footer>
+
+        
+    </div>
+</body>
+</html>
