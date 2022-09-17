@@ -6,10 +6,73 @@
     <description>О технологиях и не только (k8s)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 14 Sep 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 16 Sep 2022 00:00:00 +0000</lastBuildDate>
     
     <atom:link href="https://alebsys.github.io/tags/k8s/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Performance kube-dns</title>
+      <link>https://alebsys.github.io/posts/k8s_dns_perf_improve/</link>
+      <pubDate>Fri, 16 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://alebsys.github.io/posts/k8s_dns_perf_improve/</guid>
+      <description>&lt;h3 id=&#34;проблема&#34;&gt;Проблема
+&lt;span&gt;&lt;a href=&#34;#%d0%bf%d1%80%d0%be%d0%b1%d0%bb%d0%b5%d0%bc%d0%b0&#34;&gt;#&lt;/a&gt;&lt;/span&gt;
+&lt;/h3&gt;&lt;p&gt;В нашей инсталяции при дефолтных настройках &lt;code&gt;core-dns&lt;/code&gt; не эффективно обрабатывает запросы:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;лишние попытки разрешения с суффиксами из секции search в &lt;code&gt;/etc/resolve.conf&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;резолв AAAA записей&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Что в итоге приводит к росту latency всей системы и в целом перегружает Поды лишней работой.&lt;/p&gt;
+&lt;p&gt;Перечислю основные подстройки для улучшения ситуации.&lt;/p&gt;
+&lt;h3 id=&#34;отключение-резолва-аааа-записей&#34;&gt;Отключение резолва АААА записей
+&lt;span&gt;&lt;a href=&#34;#%d0%be%d1%82%d0%ba%d0%bb%d1%8e%d1%87%d0%b5%d0%bd%d0%b8%d0%b5-%d1%80%d0%b5%d0%b7%d0%be%d0%bb%d0%b2%d0%b0-%d0%b0%d0%b0%d0%b0%d0%b0-%d0%b7%d0%b0%d0%bf%d0%b8%d1%81%d0%b5%d0%b9&#34;&gt;#&lt;/a&gt;&lt;/span&gt;
+&lt;/h3&gt;&lt;p&gt;Вне зависимости от того используются ли ipv6 адреса в кластере или нет по дефолту &lt;code&gt;core-dns&lt;/code&gt; будет пытаться разрешать и AAAA записи в том числе.&lt;/p&gt;
+&lt;p&gt;Чтобы отключить резолв AAAA записей следует добавить в конфиг:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;template ANY AAAA {
+    rcode NXDOMAIN
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;p.s. плагин &lt;code&gt;template&lt;/code&gt; включен по умолчанию.&lt;/p&gt;
+&lt;h3 id=&#34;указание-имен-как-fqdn&#34;&gt;Указание имен как FQDN
+&lt;span&gt;&lt;a href=&#34;#%d1%83%d0%ba%d0%b0%d0%b7%d0%b0%d0%bd%d0%b8%d0%b5-%d0%b8%d0%bc%d0%b5%d0%bd-%d0%ba%d0%b0%d0%ba-fqdn&#34;&gt;#&lt;/a&gt;&lt;/span&gt;
+&lt;/h3&gt;&lt;p&gt;Как было описано в &lt;a href=&#34;https://alebsys.github.io/posts/kube-dns-resolve/#%d0%bf%d1%80%d0%be-ndots-%d0%b8-fqdn&#34;&gt;соседнем топике&lt;/a&gt;, величина &lt;code&gt;ndots&lt;/code&gt; определяет когда имя будет считаться &lt;strong&gt;FQDN&lt;/strong&gt;. Поэтому при стандартных &lt;code&gt;ndots:5&lt;/code&gt; домен &lt;code&gt;example.com&lt;/code&gt; будет резолвиться только с четвертой попытки.&lt;/p&gt;
+&lt;p&gt;Для улушения ситуации можно явно задавать &lt;code&gt;.&lt;/code&gt; в конце url: &lt;code&gt;example.com.&lt;/code&gt; , тогда &lt;code&gt;example.com&lt;/code&gt; будет резолвиться с первой попытки.&lt;/p&gt;
+&lt;h3 id=&#34;nodelocal-dnscache&#34;&gt;NodeLocal DNSCache
+&lt;span&gt;&lt;a href=&#34;#nodelocal-dnscache&#34;&gt;#&lt;/a&gt;&lt;/span&gt;
+&lt;/h3&gt;&lt;p&gt;Для ускорения трансляции имен возможно использовать локальный DNS кеш - &lt;code&gt;NodeLocal DNSCache&lt;/code&gt;.
+С версии kubernetes 1.18 он вышел в stable mode.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;NodeLocal DNSCache&lt;/code&gt; выступает прослойкой между клиентом и сервером DNS, располагаясь на каждой машине кластера как экземпляр &lt;code&gt;daemonSet&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://alebsys.github.io/images/nodelocaldns.png&#34; alt=&#34;Цепочка dns запросов&#34;&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Клиент посылает DNS запрос в &lt;code&gt;NodeLocal DNSCache&lt;/code&gt;;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;NodeLocal DNSCache&lt;/code&gt; отвечает клиенту если ответ был закеширован, иначе&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;NodeLocal DNSCache&lt;/code&gt; обращается в core-dns для обновления своих данных;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;NodeLocal DNSCache&lt;/code&gt; отвечает клиенту.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Таким образом при &amp;ldquo;удачном&amp;rdquo; обращении запрос не покидает Ноду с Подом клиента - избегает DNAT преобразований, походов по сети и как следствие разгружает core-dns Поды.&lt;/p&gt;
+&lt;h3 id=&#34;dnsconfig-per-pod&#34;&gt;dnsConfig per Pod
+&lt;span&gt;&lt;a href=&#34;#dnsconfig-per-pod&#34;&gt;#&lt;/a&gt;&lt;/span&gt;
+&lt;/h3&gt;&lt;p&gt;Если известно, что приложение в Поде ходит только вовне, то на уровне секции &lt;a href=&#34;https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-dns-config&#34;&gt;&lt;code&gt;spec.dnsConfig&lt;/code&gt;&lt;/a&gt; манифеста возможно кастомно выставить параметр &lt;code&gt;ndots&lt;/code&gt; :&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;apiVersion&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;v1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;kind&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Pod&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;metadata&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;namespace&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;default&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;dns-example&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;spec&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;dnsConfig&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;options&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      - &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;ndots&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#f92672&#34;&gt;value&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;2&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;игры-с-ndots&#34;&gt;Игры с ndots
+&lt;span&gt;&lt;a href=&#34;#%d0%b8%d0%b3%d1%80%d1%8b-%d1%81-ndots&#34;&gt;#&lt;/a&gt;&lt;/span&gt;
+&lt;/h3&gt;&lt;p&gt;Саму настройку ndots так же возможно изменять, подстраивая значение под глубину поддоменов принятых в организации.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Осторожно в кластерах k8s! Можно сломать механизмы service discovery&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+    </item>
     
     <item>
       <title>Resolve DNS записей в k8s</title>

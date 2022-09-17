@@ -3,21 +3,24 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://alebsys.github.io/tags/dns/</loc>
-    <lastmod>2022-09-14T00:00:00+00:00</lastmod>
+    <lastmod>2022-09-16T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://alebsys.github.io/tags/k8s/</loc>
-    <lastmod>2022-09-14T00:00:00+00:00</lastmod>
+    <lastmod>2022-09-16T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://alebsys.github.io/posts/k8s_dns_perf_improve/</loc>
+    <lastmod>2022-09-16T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://alebsys.github.io/posts/</loc>
-    <lastmod>2022-09-14T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://alebsys.github.io/posts/kube-dns-resolve/</loc>
-    <lastmod>2022-09-14T00:00:00+00:00</lastmod>
+    <lastmod>2022-09-16T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://alebsys.github.io/tags/</loc>
-    <lastmod>2022-09-14T00:00:00+00:00</lastmod>
+    <lastmod>2022-09-16T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://alebsys.github.io/</loc>
+    <lastmod>2022-09-16T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://alebsys.github.io/posts/kube-dns-resolve/</loc>
     <lastmod>2022-09-14T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://alebsys.github.io/tags/code-style/</loc>
