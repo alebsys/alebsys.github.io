@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>golang on О технологиях и не только</title>
+    <title>golang on За технологии.</title>
     <link>https://alebsys.github.io/tags/golang/</link>
-    <description>О технологиях и не только (golang)</description>
+    <description>За технологии. (golang)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 30 Jan 2022 00:00:00 +0000</lastBuildDate>

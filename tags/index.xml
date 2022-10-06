@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on О технологиях и не только</title>
+    <title>Tags on За технологии.</title>
     <link>https://alebsys.github.io/tags/</link>
-    <description>О технологиях и не только (Tags)</description>
+    <description>За технологии. (Tags)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 18 Sep 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 06 Oct 2022 00:00:00 +0000</lastBuildDate>
     
     <atom:link href="https://alebsys.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     

@@ -1,15 +1,52 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on О технологиях и не только</title>
+    <title>Posts on За технологии.</title>
     <link>https://alebsys.github.io/posts/</link>
-    <description>О технологиях и не только (Posts)</description>
+    <description>За технологии. (Posts)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 18 Sep 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 06 Oct 2022 00:00:00 +0000</lastBuildDate>
     
     <atom:link href="https://alebsys.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Как узнать сетевой интерфейс контейнера на Хосте</title>
+      <link>https://alebsys.github.io/posts/how_to_view_container_interface/</link>
+      <pubDate>Thu, 06 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://alebsys.github.io/posts/how_to_view_container_interface/</guid>
+      <description>&lt;p&gt;Есть контейнер с ID &lt;code&gt;7579ffaa14268&lt;/code&gt;:&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;$ crictl ps # В моей системе установлен containerd
+CONTAINER           IMAGE               CREATED             STATE               NAME        ...
+7579ffaa14268       55f4b40fe486a       14 minutes ago      Running             app         ...
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Задача узнать его хостовой интерфейс.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;В контейнере есть &lt;code&gt;sh&lt;/code&gt;:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ crictl exec -it 7579ffaa14268 sh
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ cat /sys/class/net/eth0
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;46&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ exit
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ ip a | grep ^46
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;46: calidf173e47a38@if4: &amp;lt;BROADCAST,MULTICAST,UP,LOWER_UP&amp;gt; mtu &lt;span style=&#34;color:#ae81ff&#34;&gt;1440&lt;/span&gt; qdisc noqueue state UP group default
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;В контейнере отсутствует &lt;code&gt;sh&lt;/code&gt;:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ crictl inspect --output go-template --template &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{{.info.pid}}&amp;#39;&lt;/span&gt; 7579ffaa14268
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1659&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;### Если у вас docker: docker inspect -f &amp;#39;{{.State.Pid}}&amp;#39; &amp;lt;container id&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ ip netns identify &lt;span style=&#34;color:#ae81ff&#34;&gt;1659&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cni-32258e36-761a-7563-5227-d53dd933058b
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ ip netns exec cni-32258e36-761a-7563-5227-d53dd933058b cat /sys/class/net/eth0/iflink
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;46&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ ip a | grep ^46
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;46: calidf173e47a38@if4: &amp;lt;BROADCAST,MULTICAST,UP,LOWER_UP&amp;gt; mtu &lt;span style=&#34;color:#ae81ff&#34;&gt;1440&lt;/span&gt; qdisc noqueue state UP group default
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;a href=&#34;https://www.kernel.org/doc/Documentation/ABI/testing/sysfs-class-net&#34;&gt;Документация по /sys/class/net&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://man7.org/linux/man-pages/man8/ip-netns.8.html&#34;&gt;Документация по ip-netns(8)&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>TCP Flow Control</title>
