@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>webserver on За технологии.</title>
+    <title>webserver on Linux | k8s | golang</title>
     <link>https://alebsys.github.io/tags/webserver/</link>
-    <description>За технологии. (webserver)</description>
+    <description>Linux | k8s | golang (webserver)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 08 Jan 2022 00:00:00 +0000</lastBuildDate>

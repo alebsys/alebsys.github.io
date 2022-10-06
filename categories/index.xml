@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Categories on За технологии.</title>
+    <title>Categories on Linux | k8s | golang</title>
     <link>https://alebsys.github.io/categories/</link>
-    <description>За технологии. (Categories)</description>
+    <description>Linux | k8s | golang (Categories)</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     
