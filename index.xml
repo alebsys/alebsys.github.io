@@ -6,10 +6,62 @@
     <description>Linux | k8s | golang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 06 Oct 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 31 Oct 2022 00:00:00 +0000</lastBuildDate>
     
     <atom:link href="https://alebsys.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Метрики запросов nginx</title>
+      <link>https://alebsys.github.io/posts/nginx-metrics/</link>
+      <pubDate>Mon, 31 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://alebsys.github.io/posts/nginx-metrics/</guid>
+      <description>&lt;p&gt;Для понимания производительности обработки запросов &lt;strong&gt;Ingress Controller&lt;/strong&gt; отдает следующие метрики:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;nginx_ingress_controller_request_duration_seconds&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;nginx_ingress_controller_response_duration_seconds&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Для краткости далее опустим приставку &lt;code&gt;nginx_ingress_controller_&lt;/code&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;request_duration_seconds&#34;&gt;request_duration_seconds
+&lt;span&gt;&lt;a href=&#34;#request_duration_seconds&#34;&gt;#&lt;/a&gt;&lt;/span&gt;
+&lt;/h3&gt;&lt;p&gt;Время от получения первого байта запроса и отправки последнего байта ответа.&lt;/p&gt;
+&lt;p&gt;В метрику входит:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;время обработки запроса nginx;&lt;/li&gt;
+&lt;li&gt;установление соединения с upstream;&lt;/li&gt;
+&lt;li&gt;пересылка по сети до upstream;&lt;/li&gt;
+&lt;li&gt;обработка запроса upstream&amp;rsquo;ом;&lt;/li&gt;
+&lt;li&gt;пересылка ответа до nginx;&lt;/li&gt;
+&lt;li&gt;отправка ответа от nginx до клиента вплоть до последнего байта (не получение клиентом!).&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Каждая метрика IC есть обертка над ванильной метрикой nginx. В этом случае это &lt;a href=&#34;http://nginx.org/en/docs/http/ngx_http_log_module.html&#34;&gt;&lt;code&gt;request_time&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;response_duration_seconds&#34;&gt;response_duration_seconds
+&lt;span&gt;&lt;a href=&#34;#response_duration_seconds&#34;&gt;#&lt;/a&gt;&lt;/span&gt;
+&lt;/h3&gt;&lt;p&gt;Время от начала установления соединения до получения последнего байта ответа.&lt;/p&gt;
+&lt;p&gt;В метрику входит:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;установление соединения с upstream;&lt;/li&gt;
+&lt;li&gt;пересылка по сети до upstream;&lt;/li&gt;
+&lt;li&gt;обработка запроса upstream&amp;rsquo;ом;&lt;/li&gt;
+&lt;li&gt;пересылка ответа до nginx вплоть до получения последнего байта nginx.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;nginx метрика - &lt;a href=&#34;http://nginx.org/en/docs/http/ngx_http_upstream_module.html&#34;&gt;&lt;code&gt;upstream_response_time&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;response_duration_seconds&lt;/code&gt; включает себя еще набор подметрик:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;upstream_latency_seconds&lt;/code&gt; (&lt;code&gt;upstream_connect_time&lt;/code&gt;) - время на установление соединения (TCP/ +TLS);&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;upstream_header_seconds&lt;/code&gt; (&lt;code&gt;upstream_header_time&lt;/code&gt;) - время на получение nginx заголовков ответа.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;схематичное-представление&#34;&gt;Схематичное представление
+&lt;span&gt;&lt;a href=&#34;#%d1%81%d1%85%d0%b5%d0%bc%d0%b0%d1%82%d0%b8%d1%87%d0%bd%d0%be%d0%b5-%d0%bf%d1%80%d0%b5%d0%b4%d1%81%d1%82%d0%b0%d0%b2%d0%bb%d0%b5%d0%bd%d0%b8%d0%b5&#34;&gt;#&lt;/a&gt;&lt;/span&gt;
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://alebsys.github.io/images/nginx.png&#34; alt=&#34;request-flow&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;пруфы&#34;&gt;Пруфы
+&lt;span&gt;&lt;a href=&#34;#%d0%bf%d1%80%d1%83%d1%84%d1%8b&#34;&gt;#&lt;/a&gt;&lt;/span&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://stackoverflow.com/questions/47270319/when-does-nginx-upstream-response-time-start-stop-specifically&#34;&gt;обсуждение на stackoverflow, второй пост&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>Как узнать сетевой интерфейс контейнера на Хосте</title>
