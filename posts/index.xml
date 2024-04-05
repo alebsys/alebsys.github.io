@@ -4,16 +4,19 @@
     <title>Posts on Lebedev Aleksandr</title>
     <link>https://alebsys.github.io/posts/</link>
     <description>Recent content in Posts on Lebedev Aleksandr</description>
-    <generator>Hugo -- gohugo.io</generator><atom:link href="https://alebsys.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Tue, 19 Mar 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://alebsys.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title></title>
-      <link>https://alebsys.github.io/posts/about/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <title>TCP ретрансмиты и их направления</title>
+      <link>https://alebsys.github.io/posts/tcp-retransmit-ebpf-exporter/</link>
+      <pubDate>Tue, 19 Mar 2024 00:00:00 +0000</pubDate>
       
-      <guid>https://alebsys.github.io/posts/about/</guid>
-      <description>Привет! Меня зовут Александр, я тружусь SRE в Samokat-tech.
-Люблю linux, сети и погружение в детали. Развиваюсь в сторону performance engineering.
-Мои публикации Как мы боролись с овербукингом Kubernetes-кластеров, habr.com Контакты Telegram: @alebsys Linkedin: @alebsys Github: @alebsys Mail: lebedevam88@gmail.com </description>
+      <guid>https://alebsys.github.io/posts/tcp-retransmit-ebpf-exporter/</guid>
+      <description>Объем TCP ретрансмитов пожалуй один из наиболее говорящих симптомов деградации системы.
+Причины возникновения могут быть различны, самые частые в моей практике:
+переполнения очередей, на уровнях сетевого оборудования, NIC, операционной системы, сокетов, etc; out of order пакеты, связанные например с неоднородными маршрутами в рамках одного сетевого потока. В момент проблемы хочется быстро ее обнаружить и определить источник.
+Стандартные утилиты На помощь приходят встроенные в linux утилиты:
+netstat -s | grep -i retr 3951614 segments retransmitted 1434 times recovered from packet loss due to fast retransmit Detected reordering 149 times using reno fast retransmit TCPLostRetransmit: 2931590 981 timeouts after reno fast retransmit 3538 fast retransmits 4126 retransmits in slow start TCPSynRetrans: 3918500 Те же метрики мы можем собрать и node_exporter’ом: Проблема в слишком “общей” картине таких метрик.</description>
     </item>
     
   </channel>
