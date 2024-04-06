@@ -5,60 +5,78 @@
     <link>https://alebsys.github.io/tags/</link>
     <description>Recent content in Tags on Lebedev Aleksandr</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 19 Mar 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://alebsys.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <language>en</language>
+    <lastBuildDate>Sun, 31 Mar 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://alebsys.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>cloudflare</title>
-      <link>https://alebsys.github.io/tags/cloudflare/</link>
-      <pubDate>Tue, 19 Mar 2024 00:00:00 +0000</pubDate>
-      
-      <guid>https://alebsys.github.io/tags/cloudflare/</guid>
+      <title>Haproxy</title>
+      <link>https://alebsys.github.io/tags/haproxy/</link>
+      <pubDate>Sun, 31 Mar 2024 00:00:00 +0000</pubDate>
+      <guid>https://alebsys.github.io/tags/haproxy/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>ebbf</title>
-      <link>https://alebsys.github.io/tags/ebbf/</link>
-      <pubDate>Tue, 19 Mar 2024 00:00:00 +0000</pubDate>
-      
-      <guid>https://alebsys.github.io/tags/ebbf/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>ebpf_exporter</title>
-      <link>https://alebsys.github.io/tags/ebpf_exporter/</link>
-      <pubDate>Tue, 19 Mar 2024 00:00:00 +0000</pubDate>
-      
-      <guid>https://alebsys.github.io/tags/ebpf_exporter/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>grafana</title>
-      <link>https://alebsys.github.io/tags/grafana/</link>
-      <pubDate>Tue, 19 Mar 2024 00:00:00 +0000</pubDate>
-      
-      <guid>https://alebsys.github.io/tags/grafana/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>linux</title>
+      <title>Linux</title>
       <link>https://alebsys.github.io/tags/linux/</link>
-      <pubDate>Tue, 19 Mar 2024 00:00:00 +0000</pubDate>
-      
+      <pubDate>Sun, 31 Mar 2024 00:00:00 +0000</pubDate>
       <guid>https://alebsys.github.io/tags/linux/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>tcp</title>
+      <title>Memory</title>
+      <link>https://alebsys.github.io/tags/memory/</link>
+      <pubDate>Sun, 31 Mar 2024 00:00:00 +0000</pubDate>
+      <guid>https://alebsys.github.io/tags/memory/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Network</title>
+      <link>https://alebsys.github.io/tags/network/</link>
+      <pubDate>Sun, 31 Mar 2024 00:00:00 +0000</pubDate>
+      <guid>https://alebsys.github.io/tags/network/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Troubleshooting</title>
+      <link>https://alebsys.github.io/tags/troubleshooting/</link>
+      <pubDate>Sun, 31 Mar 2024 00:00:00 +0000</pubDate>
+      <guid>https://alebsys.github.io/tags/troubleshooting/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Cloudflare</title>
+      <link>https://alebsys.github.io/tags/cloudflare/</link>
+      <pubDate>Tue, 19 Mar 2024 00:00:00 +0000</pubDate>
+      <guid>https://alebsys.github.io/tags/cloudflare/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Ebbf</title>
+      <link>https://alebsys.github.io/tags/ebbf/</link>
+      <pubDate>Tue, 19 Mar 2024 00:00:00 +0000</pubDate>
+      <guid>https://alebsys.github.io/tags/ebbf/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Ebpf_exporter</title>
+      <link>https://alebsys.github.io/tags/ebpf_exporter/</link>
+      <pubDate>Tue, 19 Mar 2024 00:00:00 +0000</pubDate>
+      <guid>https://alebsys.github.io/tags/ebpf_exporter/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Grafana</title>
+      <link>https://alebsys.github.io/tags/grafana/</link>
+      <pubDate>Tue, 19 Mar 2024 00:00:00 +0000</pubDate>
+      <guid>https://alebsys.github.io/tags/grafana/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Tcp</title>
       <link>https://alebsys.github.io/tags/tcp/</link>
       <pubDate>Tue, 19 Mar 2024 00:00:00 +0000</pubDate>
-      
       <guid>https://alebsys.github.io/tags/tcp/</guid>
       <description></description>
     </item>
-    
   </channel>
 </rss>
