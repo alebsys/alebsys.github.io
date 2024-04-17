@@ -6,13 +6,23 @@
     <description>Recent content in Grafana on Lebedev Aleksandr</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 19 Mar 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 16 Apr 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://alebsys.github.io/tags/grafana/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Tooling. Cache Hit Ratio</title>
+      <link>https://alebsys.github.io/posts/cachestat-ebpf-exporter/</link>
+      <pubDate>Tue, 16 Apr 2024 00:00:00 +0000</pubDate>
+      <guid>https://alebsys.github.io/posts/cachestat-ebpf-exporter/</guid>
+      <description>Об утилите cachestat я узнал из статьи Brendan Gregg - Analyzing a High Rate of Paging.
+В ней расследуются причины аномально долгого процессинга файлов размером в 100Gbytes, тогда как файлы в 40Gbytes обрабатывались на несколько порядков быстрее.
+В том кейсе точно поставить диагноз - большой объект не помещался в кеш, что приводило к trashing&amp;rsquo;у страниц памяти, автору помог инструмент cachestat.
+Если в кратце, то утилита подсчитывает соотношение попаданий в кеш файловой системы относительно общего числа операций на чтение - cache hit ratio:</description>
+    </item>
+    <item>
       <title>TCP ретрансмиты и их направления</title>
-      <link>https://alebsys.github.io/posts/tcp-retransmit-ebpf-exporter/</link>
+      <link>https://alebsys.github.io/posts/tcp-retransmit-ebpf-exporter-copy/</link>
       <pubDate>Tue, 19 Mar 2024 00:00:00 +0000</pubDate>
-      <guid>https://alebsys.github.io/posts/tcp-retransmit-ebpf-exporter/</guid>
+      <guid>https://alebsys.github.io/posts/tcp-retransmit-ebpf-exporter-copy/</guid>
       <description>Объем TCP ретрансмитов пожалуй один из наиболее говорящих симптомов деградации системы.
 Причины возникновения могут быть различны, самые частые в моей практике:
 переполнения очередей, на уровнях сетевого оборудования, NIC, операционной системы, сокетов, etc; out of order пакеты, связанные например с неоднородными маршрутами в рамках одного сетевого потока. В момент проблемы хочется быстро ее обнаружить и определить источник.
