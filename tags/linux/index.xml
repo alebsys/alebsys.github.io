@@ -19,7 +19,17 @@
 Если в кратце, то утилита подсчитывает соотношение попаданий в кеш файловой системы относительно общего числа операций на чтение - cache hit ratio:</description>
     </item>
     <item>
-      <title>haproxy и утечка памяти</title>
+      <title>Tooling. Latency I/O операций</title>
+      <link>https://alebsys.github.io/posts/xfs-ebpf-exporter/</link>
+      <pubDate>Fri, 05 Apr 2024 00:00:00 +0000</pubDate>
+      <guid>https://alebsys.github.io/posts/xfs-ebpf-exporter/</guid>
+      <description>Проблематика Чтобы оценить производительность ввода/вывода обычно принято обращаться к метрикам дисковой подсистемы, благо они богато представлены “стандартными” инструментами linux - sar, iostat, atop, etc.
+Проблема данного подхода, в упрощении общей картины, он игнорирует такой важный компонент в работе I/O подсистемы как файловая система.
+Например:
+приложение может использовать асинхронную модель записи и flush на диск происходит порциями и когда-то потом; приложение хочет прочитать 1 байт данных, но считать с диска возможно только блоком в 4096 байт; используется read-ahead при последовательном чтении; чтение происходит из кеша файловой системы - запросов на чтение много, а диск почти не загружен; и так далее.</description>
+    </item>
+    <item>
+      <title>Haproxy memory leak</title>
       <link>https://alebsys.github.io/posts/haproxy-mem-leak/</link>
       <pubDate>Sun, 31 Mar 2024 00:00:00 +0000</pubDate>
       <guid>https://alebsys.github.io/posts/haproxy-mem-leak/</guid>
@@ -29,10 +39,10 @@
 В этот раз по OOM прибило несколько экземпляров haproxy - согласитесь событие нестандартное. Требовалось понять причины и предложить решение.</description>
     </item>
     <item>
-      <title>TCP ретрансмиты и их направления</title>
-      <link>https://alebsys.github.io/posts/tcp-retransmit-ebpf-exporter-copy/</link>
+      <title>Tooling. TCP ретрансмиты и их направления</title>
+      <link>https://alebsys.github.io/posts/tcp-retransmit-ebpf-exporter/</link>
       <pubDate>Tue, 19 Mar 2024 00:00:00 +0000</pubDate>
-      <guid>https://alebsys.github.io/posts/tcp-retransmit-ebpf-exporter-copy/</guid>
+      <guid>https://alebsys.github.io/posts/tcp-retransmit-ebpf-exporter/</guid>
       <description>Объем TCP ретрансмитов пожалуй один из наиболее говорящих симптомов деградации системы.
 Причины возникновения могут быть различны, самые частые в моей практике:
 переполнения очередей, на уровнях сетевого оборудования, NIC, операционной системы, сокетов, etc; out of order пакеты, связанные например с неоднородными маршрутами в рамках одного сетевого потока. В момент проблемы хочется быстро ее обнаружить и определить источник.

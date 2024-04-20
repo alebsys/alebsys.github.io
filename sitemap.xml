@@ -32,6 +32,15 @@
     <loc>https://alebsys.github.io/posts/cachestat-ebpf-exporter/</loc>
     <lastmod>2024-04-16T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://alebsys.github.io/tags/ext4/</loc>
+    <lastmod>2024-04-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://alebsys.github.io/posts/xfs-ebpf-exporter/</loc>
+    <lastmod>2024-04-05T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://alebsys.github.io/tags/xfs/</loc>
+    <lastmod>2024-04-05T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://alebsys.github.io/tags/haproxy/</loc>
     <lastmod>2024-03-31T00:00:00+00:00</lastmod>
   </url><url>
@@ -50,7 +59,7 @@
     <loc>https://alebsys.github.io/tags/tcp/</loc>
     <lastmod>2024-03-19T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://alebsys.github.io/posts/tcp-retransmit-ebpf-exporter-copy/</loc>
+    <loc>https://alebsys.github.io/posts/tcp-retransmit-ebpf-exporter/</loc>
     <lastmod>2024-03-19T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://alebsys.github.io/about/</loc>

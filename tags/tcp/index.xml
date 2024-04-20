@@ -9,10 +9,10 @@
     <lastBuildDate>Tue, 19 Mar 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://alebsys.github.io/tags/tcp/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>TCP ретрансмиты и их направления</title>
-      <link>https://alebsys.github.io/posts/tcp-retransmit-ebpf-exporter-copy/</link>
+      <title>Tooling. TCP ретрансмиты и их направления</title>
+      <link>https://alebsys.github.io/posts/tcp-retransmit-ebpf-exporter/</link>
       <pubDate>Tue, 19 Mar 2024 00:00:00 +0000</pubDate>
-      <guid>https://alebsys.github.io/posts/tcp-retransmit-ebpf-exporter-copy/</guid>
+      <guid>https://alebsys.github.io/posts/tcp-retransmit-ebpf-exporter/</guid>
       <description>Объем TCP ретрансмитов пожалуй один из наиболее говорящих симптомов деградации системы.
 Причины возникновения могут быть различны, самые частые в моей практике:
 переполнения очередей, на уровнях сетевого оборудования, NIC, операционной системы, сокетов, etc; out of order пакеты, связанные например с неоднородными маршрутами в рамках одного сетевого потока. В момент проблемы хочется быстро ее обнаружить и определить источник.
