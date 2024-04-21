@@ -6,8 +6,19 @@
     <description>Recent content in Posts on Lebedev Aleksandr</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 16 Apr 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 21 Apr 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://alebsys.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Long way to the application, №1.</title>
+      <link>https://alebsys.github.io/posts/long-way-to-the-app-1/</link>
+      <pubDate>Sun, 21 Apr 2024 00:00:00 +0000</pubDate>
+      <guid>https://alebsys.github.io/posts/long-way-to-the-app-1/</guid>
+      <description>Прежде чем сетевой пакет из сервиса А попадет в сервис Б, ему следует миновать множество систем по середине, где он сделает ни одну остановку.
+И, что самое интересное, никто (или ничто) не гарантируем ему успех в конечно счете.
+Описать полный путь мне не хватит ни знаний, ни терпения, поэтому сосредоточусь только на конечной части маршрута - пакет прибыл на целевой Хост, где живет сервис Б.
+Цели заметки:
+показать через какие остановки, считай очереди, проходит сетевой пакет прежде чем достигнет получателя; как мы можем эти очереди мониторить и как на них влиять.</description>
+    </item>
     <item>
       <title>Tooling. Cache Hit Ratio</title>
       <link>https://alebsys.github.io/posts/cachestat-ebpf-exporter/</link>
