@@ -6,8 +6,19 @@
     <description>Recent content on Lebedev Aleksandr</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 14 May 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 23 May 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://alebsys.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Где мой трафик?</title>
+      <link>https://alebsys.github.io/posts/metallb-calico-ebpf/</link>
+      <pubDate>Thu, 23 May 2024 00:00:00 +0000</pubDate>
+      <guid>https://alebsys.github.io/posts/metallb-calico-ebpf/</guid>
+      <description>Наблюдаемость и простота отладки одни из важнейших свойств системы, которые следует учитывать уже на этапе выбора технологий. В противном случае может быть больно и дорого.
+Следующий этап - разобраться как технология устроена и желательно сделать это еще до развертывания в боевых окружениях. Но бывает конечно по всякому.
+Сегодня рассмотрим сеть в Kubernetes и выявим несоответствия в учете трафика, которые могут вводить в заблуждение.
+Дано:
+Kubernetes кластер; MetalLB L2 как loadBalancer; Nginx Ingress Controller; Calico на ebpf.</description>
+    </item>
     <item>
       <title>Long way to the application, №2.</title>
       <link>https://alebsys.github.io/posts/long-way-to-the-app-2/</link>
