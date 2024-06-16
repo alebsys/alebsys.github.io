@@ -6,8 +6,18 @@
     <description>Recent content in Posts on Lebedev Aleksandr</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 23 May 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 16 Jun 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://alebsys.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Memory Soft limits</title>
+      <link>https://alebsys.github.io/posts/memory-soft-limit/</link>
+      <pubDate>Sun, 16 Jun 2024 00:00:00 +0000</pubDate>
+      <guid>https://alebsys.github.io/posts/memory-soft-limit/</guid>
+      <description>Изучая возможности контрольных групп в linux наткнулся на параметр memory.soft_limit_in_bytes:
+When the system detects memory contention or low memory, control groups are pushed back to their soft limits. If the soft limit of each control group is very high, they are pushed back as much as possible to make sure that one control group does not starve the others of memory.
+Аналог в cgroup2 - memory.low
+Звучит интересно! Сделаем несколько тестов для понимания как это все работает.</description>
+    </item>
     <item>
       <title>Где мой трафик?</title>
       <link>https://alebsys.github.io/posts/metallb-calico-ebpf/</link>

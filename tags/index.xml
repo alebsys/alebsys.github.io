@@ -6,8 +6,36 @@
     <description>Recent content in Tags on Lebedev Aleksandr</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 23 May 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 16 Jun 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://alebsys.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Cgroup</title>
+      <link>https://alebsys.github.io/tags/cgroup/</link>
+      <pubDate>Sun, 16 Jun 2024 00:00:00 +0000</pubDate>
+      <guid>https://alebsys.github.io/tags/cgroup/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Docker</title>
+      <link>https://alebsys.github.io/tags/docker/</link>
+      <pubDate>Sun, 16 Jun 2024 00:00:00 +0000</pubDate>
+      <guid>https://alebsys.github.io/tags/docker/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Linux</title>
+      <link>https://alebsys.github.io/tags/linux/</link>
+      <pubDate>Sun, 16 Jun 2024 00:00:00 +0000</pubDate>
+      <guid>https://alebsys.github.io/tags/linux/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Memory</title>
+      <link>https://alebsys.github.io/tags/memory/</link>
+      <pubDate>Sun, 16 Jun 2024 00:00:00 +0000</pubDate>
+      <guid>https://alebsys.github.io/tags/memory/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Calico</title>
       <link>https://alebsys.github.io/tags/calico/</link>
@@ -27,13 +55,6 @@
       <link>https://alebsys.github.io/tags/kubernets/</link>
       <pubDate>Thu, 23 May 2024 00:00:00 +0000</pubDate>
       <guid>https://alebsys.github.io/tags/kubernets/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Linux</title>
-      <link>https://alebsys.github.io/tags/linux/</link>
-      <pubDate>Thu, 23 May 2024 00:00:00 +0000</pubDate>
-      <guid>https://alebsys.github.io/tags/linux/</guid>
       <description></description>
     </item>
     <item>
@@ -125,13 +146,6 @@
       <link>https://alebsys.github.io/tags/haproxy/</link>
       <pubDate>Sun, 31 Mar 2024 00:00:00 +0000</pubDate>
       <guid>https://alebsys.github.io/tags/haproxy/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Memory</title>
-      <link>https://alebsys.github.io/tags/memory/</link>
-      <pubDate>Sun, 31 Mar 2024 00:00:00 +0000</pubDate>
-      <guid>https://alebsys.github.io/tags/memory/</guid>
       <description></description>
     </item>
     <item>
