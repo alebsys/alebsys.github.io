@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Ebpf on Lebedev Aleksandr</title>
+    <title>Ebpf on Performance Matters!</title>
     <link>https://alebsys.github.io/tags/ebpf/</link>
-    <description>Recent content in Ebpf on Lebedev Aleksandr</description>
+    <description>Recent content in Ebpf on Performance Matters!</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Thu, 23 May 2024 00:00:00 +0000</lastBuildDate>
