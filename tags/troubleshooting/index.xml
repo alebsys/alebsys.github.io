@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Troubleshooting on Performance Matters!</title>
-    <link>http://localhost:1313/tags/troubleshooting/</link>
+    <link>https://alebsys.github.io/tags/troubleshooting/</link>
     <description>Recent content in Troubleshooting on Performance Matters!</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Sun, 31 Mar 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/troubleshooting/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://alebsys.github.io/tags/troubleshooting/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Haproxy memory leak</title>
-      <link>http://localhost:1313/posts/haproxy-mem-leak/</link>
+      <link>https://alebsys.github.io/posts/haproxy-mem-leak/</link>
       <pubDate>Sun, 31 Mar 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/haproxy-mem-leak/</guid>
+      <guid>https://alebsys.github.io/posts/haproxy-mem-leak/</guid>
       <description>На днях диагностировал утечку памяти в кластере haproxy, в процессе исследования допустил несколько ошибок, что привело к более долгой локализации проблемы.
 На примере данного кейса хочу провести небольшое ретро.
 Моя основная деятельность связана с поиском и устранением проблем, негативно влияющих на производительность системы в целом, будь то runtime приложения, сеть, слой виртуализации, база данных или что-угодно еще.

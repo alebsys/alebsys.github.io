@@ -2,24 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Performance Matters!</title>
-    <link>http://localhost:1313/</link>
+    <link>https://alebsys.github.io/</link>
     <description>Recent content on Performance Matters!</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 09 Jul 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Thread State Analysis</title>
-      <link>http://localhost:1313/posts/tsa/</link>
-      <pubDate>Tue, 09 Jul 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/tsa/</guid>
-      <description>Сессия траблшутинга - это не только конечный результат, но и процесс, протекающий с различной степенью эффективности. Одного умения пользоваться инструментами, знать флаги и уверенно работать в консоли недостаточно. Необходима систематизация.</description>
-    </item>
+    <lastBuildDate>Sun, 16 Jun 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://alebsys.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Memory Soft limits</title>
-      <link>http://localhost:1313/posts/memory-soft-limit/</link>
+      <link>https://alebsys.github.io/posts/memory-soft-limit/</link>
       <pubDate>Sun, 16 Jun 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/memory-soft-limit/</guid>
+      <guid>https://alebsys.github.io/posts/memory-soft-limit/</guid>
       <description>Изучая возможности контрольных групп в linux наткнулся на параметр memory.soft_limit_in_bytes:
 When the system detects memory contention or low memory, control groups are pushed back to their soft limits. If the soft limit of each control group is very high, they are pushed back as much as possible to make sure that one control group does not starve the others of memory.
 Аналог в cgroup2 - memory.low
@@ -27,9 +20,9 @@ When the system detects memory contention or low memory, control groups are push
     </item>
     <item>
       <title>Где мой трафик?</title>
-      <link>http://localhost:1313/posts/metallb-calico-ebpf/</link>
+      <link>https://alebsys.github.io/posts/metallb-calico-ebpf/</link>
       <pubDate>Thu, 23 May 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/metallb-calico-ebpf/</guid>
+      <guid>https://alebsys.github.io/posts/metallb-calico-ebpf/</guid>
       <description>Наблюдаемость и простота отладки одни из важнейших свойств системы, которые следует учитывать уже на этапе выбора технологий. В противном случае может быть больно и дорого.
 Следующий этап - разобраться как технология устроена и желательно сделать это еще до развертывания в боевых окружениях. Но бывает конечно по всякому.
 Сегодня рассмотрим сеть в Kubernetes и выявим несоответствия в учете трафика, которые могут вводить в заблуждение.
@@ -38,9 +31,9 @@ Kubernetes кластер; MetalLB L2 как loadBalancer; Nginx Ingress Control
     </item>
     <item>
       <title>Long way to the application, №2.</title>
-      <link>http://localhost:1313/posts/long-way-to-the-app-2/</link>
+      <link>https://alebsys.github.io/posts/long-way-to-the-app-2/</link>
       <pubDate>Tue, 14 May 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/long-way-to-the-app-2/</guid>
+      <guid>https://alebsys.github.io/posts/long-way-to-the-app-2/</guid>
       <description>Привет!
 Продолжаем изучать маршрут сетевого пакета по подсистемам ядра linux.
 В первой части мы разобрали отрезок от сетевой карты гипервизора до txqueue - очередь перед виртуальной машиной в которой и крутится наш сервис.
@@ -50,16 +43,16 @@ RX queue Процесс обработки трафика виртуальной
     </item>
     <item>
       <title>Long way to the application, №1.</title>
-      <link>http://localhost:1313/posts/long-way-to-the-app-1/</link>
+      <link>https://alebsys.github.io/posts/long-way-to-the-app-1/</link>
       <pubDate>Sun, 21 Apr 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/long-way-to-the-app-1/</guid>
+      <guid>https://alebsys.github.io/posts/long-way-to-the-app-1/</guid>
       <description>Прежде чем сетевой пакет из сервиса А попадет в сервис Б, ему следует миновать множество систем по середине&amp;hellip;</description>
     </item>
     <item>
       <title>Tooling. Cache Hit Ratio</title>
-      <link>http://localhost:1313/posts/cachestat-ebpf-exporter/</link>
+      <link>https://alebsys.github.io/posts/cachestat-ebpf-exporter/</link>
       <pubDate>Tue, 16 Apr 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/cachestat-ebpf-exporter/</guid>
+      <guid>https://alebsys.github.io/posts/cachestat-ebpf-exporter/</guid>
       <description>Об утилите cachestat я узнал из статьи Brendan Gregg - Analyzing a High Rate of Paging.
 В ней расследуются причины аномально долгого процессинга файлов размером в 100Gbytes, тогда как файлы в 40Gbytes обрабатывались на несколько порядков быстрее.
 В том кейсе точно поставить диагноз - большой объект не помещался в кеш, что приводило к trashing&amp;rsquo;у страниц памяти, автору помог инструмент cachestat.
@@ -67,9 +60,9 @@ RX queue Процесс обработки трафика виртуальной
     </item>
     <item>
       <title>Tooling. Latency I/O операций</title>
-      <link>http://localhost:1313/posts/xfs-ebpf-exporter/</link>
+      <link>https://alebsys.github.io/posts/xfs-ebpf-exporter/</link>
       <pubDate>Fri, 05 Apr 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/xfs-ebpf-exporter/</guid>
+      <guid>https://alebsys.github.io/posts/xfs-ebpf-exporter/</guid>
       <description>Проблематика Чтобы оценить производительность ввода/вывода обычно принято обращаться к метрикам дисковой подсистемы, благо они богато представлены “стандартными” инструментами linux - sar, iostat, atop, etc.
 Проблема данного подхода, в упрощении общей картины, он игнорирует такой важный компонент в работе I/O подсистемы как файловая система.
 Например:
@@ -77,9 +70,9 @@ RX queue Процесс обработки трафика виртуальной
     </item>
     <item>
       <title>Haproxy memory leak</title>
-      <link>http://localhost:1313/posts/haproxy-mem-leak/</link>
+      <link>https://alebsys.github.io/posts/haproxy-mem-leak/</link>
       <pubDate>Sun, 31 Mar 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/haproxy-mem-leak/</guid>
+      <guid>https://alebsys.github.io/posts/haproxy-mem-leak/</guid>
       <description>На днях диагностировал утечку памяти в кластере haproxy, в процессе исследования допустил несколько ошибок, что привело к более долгой локализации проблемы.
 На примере данного кейса хочу провести небольшое ретро.
 Моя основная деятельность связана с поиском и устранением проблем, негативно влияющих на производительность системы в целом, будь то runtime приложения, сеть, слой виртуализации, база данных или что-угодно еще.
@@ -87,9 +80,9 @@ RX queue Процесс обработки трафика виртуальной
     </item>
     <item>
       <title>Tooling. TCP ретрансмиты и их направления</title>
-      <link>http://localhost:1313/posts/tcp-retransmit-ebpf-exporter/</link>
+      <link>https://alebsys.github.io/posts/tcp-retransmit-ebpf-exporter/</link>
       <pubDate>Tue, 19 Mar 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/tcp-retransmit-ebpf-exporter/</guid>
+      <guid>https://alebsys.github.io/posts/tcp-retransmit-ebpf-exporter/</guid>
       <description>Объем TCP ретрансмитов пожалуй один из наиболее говорящих симптомов деградации системы.
 Причины возникновения могут быть различны, самые частые в моей практике:
 переполнения очередей, на уровнях сетевого оборудования, NIC, операционной системы, сокетов, etc; out of order пакеты, связанные например с неоднородными маршрутами в рамках одного сетевого потока. В момент проблемы хочется быстро ее обнаружить и определить источник.
