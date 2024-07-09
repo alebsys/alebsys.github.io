@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Filesystem on Performance Matters!</title>
-    <link>https://alebsys.github.io/tags/filesystem/</link>
+    <link>http://localhost:1313/tags/filesystem/</link>
     <description>Recent content in Filesystem on Performance Matters!</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Tue, 16 Apr 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://alebsys.github.io/tags/filesystem/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/filesystem/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Tooling. Cache Hit Ratio</title>
-      <link>https://alebsys.github.io/posts/cachestat-ebpf-exporter/</link>
+      <link>http://localhost:1313/posts/cachestat-ebpf-exporter/</link>
       <pubDate>Tue, 16 Apr 2024 00:00:00 +0000</pubDate>
-      <guid>https://alebsys.github.io/posts/cachestat-ebpf-exporter/</guid>
+      <guid>http://localhost:1313/posts/cachestat-ebpf-exporter/</guid>
       <description>Об утилите cachestat я узнал из статьи Brendan Gregg - Analyzing a High Rate of Paging.
 В ней расследуются причины аномально долгого процессинга файлов размером в 100Gbytes, тогда как файлы в 40Gbytes обрабатывались на несколько порядков быстрее.
 В том кейсе точно поставить диагноз - большой объект не помещался в кеш, что приводило к trashing&amp;rsquo;у страниц памяти, автору помог инструмент cachestat.

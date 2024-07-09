@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Memory on Performance Matters!</title>
-    <link>https://alebsys.github.io/tags/memory/</link>
+    <link>http://localhost:1313/tags/memory/</link>
     <description>Recent content in Memory on Performance Matters!</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Sun, 16 Jun 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://alebsys.github.io/tags/memory/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/memory/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Memory Soft limits</title>
-      <link>https://alebsys.github.io/posts/memory-soft-limit/</link>
+      <link>http://localhost:1313/posts/memory-soft-limit/</link>
       <pubDate>Sun, 16 Jun 2024 00:00:00 +0000</pubDate>
-      <guid>https://alebsys.github.io/posts/memory-soft-limit/</guid>
+      <guid>http://localhost:1313/posts/memory-soft-limit/</guid>
       <description>Изучая возможности контрольных групп в linux наткнулся на параметр memory.soft_limit_in_bytes:
 When the system detects memory contention or low memory, control groups are pushed back to their soft limits. If the soft limit of each control group is very high, they are pushed back as much as possible to make sure that one control group does not starve the others of memory.
 Аналог в cgroup2 - memory.low
@@ -20,9 +20,9 @@ When the system detects memory contention or low memory, control groups are push
     </item>
     <item>
       <title>Haproxy memory leak</title>
-      <link>https://alebsys.github.io/posts/haproxy-mem-leak/</link>
+      <link>http://localhost:1313/posts/haproxy-mem-leak/</link>
       <pubDate>Sun, 31 Mar 2024 00:00:00 +0000</pubDate>
-      <guid>https://alebsys.github.io/posts/haproxy-mem-leak/</guid>
+      <guid>http://localhost:1313/posts/haproxy-mem-leak/</guid>
       <description>На днях диагностировал утечку памяти в кластере haproxy, в процессе исследования допустил несколько ошибок, что привело к более долгой локализации проблемы.
 На примере данного кейса хочу провести небольшое ретро.
 Моя основная деятельность связана с поиском и устранением проблем, негативно влияющих на производительность системы в целом, будь то runtime приложения, сеть, слой виртуализации, база данных или что-угодно еще.
