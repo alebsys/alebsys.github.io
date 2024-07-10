@@ -1,0 +1,127 @@
+ratio 10%
+
+=== Active Threads ========================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
+
+ samples | avg_threads | comm                     | state                  | cmdline                                                             | syscall         | wchan                           | kstack
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+     123 |        0.48 | (postgres)               | Disk (Uninterruptible) | postgres: 11/main: postgres benchmark [local] UPDATE                | write           | ext4_buffered_write_iter        | ksys_write()->vfs_write()->ext4_buffered_write_iter()
+      97 |        0.38 | (postgres)               | Disk (Uninterruptible) | postgres: 11/main: postgres benchmark [local] COMMIT                | fdatasync       | folio_wait_bit_common           | __x64_sys_fdatasync()->ext4_sync_file()->file_write_and_wait_range()->__filemap_fdatawait_range()->folio_wait_writeback()->folio_wait_bit_common()
+      61 |        0.24 | (kworker/u*:*+flush-*:*) | Disk (Uninterruptible) |                                                                     | [kernel_thread] | rq_qos_wait                     | kthread()->worker_thread()->process_one_work()->wb_workfn()->wb_writeback()->__writeback_inodes_wb()->writeback_sb_inodes()->__writeback_single_inode()->do_writepages()->ext4_writepages()->mpage_prepare_extent_to_map()->mpage_process_page_bufs()->mpage_submit_page()->ext4_bio_write_page()->submit_bio_noacct_nocheck()->blk_mq_submit_bio()->__rq_qos_throttle()->wbt_wait()->rq_qos_wait()
+      57 |        0.22 | (postgres)               | Disk (Uninterruptible) | postgres: 11/main: background writer                                | sync_file_range | rq_qos_wait                     | __x64_sys_sync_file_range()->sync_file_range()->__filemap_fdatawrite_range()->filemap_fdatawrite_wbc()->do_writepages()->ext4_writepages()->ext4_io_submit()->submit_bio_noacct_nocheck()->blk_mq_submit_bio()->__rq_qos_throttle()->wbt_wait()->rq_qos_wait()
+      36 |        0.14 | (postgres)               | Disk (Uninterruptible) | postgres: 11/main: postgres benchmark [local] COMMIT                | fdatasync       | rq_qos_wait                     | __x64_sys_fdatasync()->ext4_sync_file()->blkdev_issue_flush()->submit_bio_wait()->submit_bio_noacct_nocheck()->blk_mq_submit_bio()->__rq_qos_throttle()->wbt_wait()->rq_qos_wait()
+      31 |        0.12 | (postgres)               | Disk (Uninterruptible) | postgres: 11/main: postgres benchmark [local] COMMIT                | fdatasync       | rq_qos_wait                     | __x64_sys_fdatasync()->ext4_sync_file()->file_write_and_wait_range()->__filemap_fdatawrite_range()->filemap_fdatawrite_wbc()->do_writepages()->ext4_writepages()->ext4_io_submit()->submit_bio_noacct_nocheck()->blk_mq_submit_bio()->__rq_qos_throttle()->wbt_wait()->rq_qos_wait()
+      19 |        0.07 | (postgres)               | Disk (Uninterruptible) | postgres: 11/main: postgres benchmark [local] COMMIT                | fdatasync       | submit_bio_wait                 | __x64_sys_fdatasync()->ext4_sync_file()->blkdev_issue_flush()->submit_bio_wait()
+
+postgres@os-012077104:/root$ pgbench -c 100 -j 4 -P 60 -T 600 benchmark
+starting vacuum...end.
+progress: 60.0 s, 2850.8 tps, lat 35.014 ms stddev 40.478
+progress: 120.0 s, 2532.1 tps, lat 39.444 ms stddev 44.845
+progress: 180.0 s, 2309.1 tps, lat 43.363 ms stddev 52.166
+progress: 240.0 s, 2763.9 tps, lat 36.079 ms stddev 44.463
+progress: 300.0 s, 2704.8 tps, lat 37.075 ms stddev 43.674
+progress: 360.0 s, 2361.5 tps, lat 42.349 ms stddev 51.022
+progress: 420.0 s, 2880.7 tps, lat 34.693 ms stddev 40.863
+progress: 480.0 s, 2868.9 tps, lat 34.873 ms stddev 42.426
+progress: 540.0 s, 2698.1 tps, lat 37.068 ms stddev 43.405
+progress: 600.0 s, 1984.1 tps, lat 50.368 ms stddev 61.726
+transaction type: <builtin: TPC-B (sort of)>
+scaling factor: 150
+query mode: simple
+number of clients: 100
+number of threads: 4
+duration: 600 s
+number of transactions actually processed: 1557324
+latency average = 38.531 ms
+latency stddev = 46.452 ms
+tps = 2594.258196 (including connections establishing)
+tps = 2594.273763 (excluding connections establishing)
+
+
+
+=== Active Threads =======================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
+
+ samples | avg_threads | comm                     | state                  | cmdline                                                             | filename                                                     | syscall         | wchan                           | kstack
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+     749 |        0.48 | (postgres)               | Disk (Uninterruptible) | postgres: 11/main: postgres benchmark [local] UPDATE                | /var/lib/postgresql/11/main/base/16399/16412.1               | write           | ext4_buffered_write_iter        | ksys_write()->vfs_write()->ext4_buffered_write_iter()
+     619 |        0.39 | (postgres)               | Disk (Uninterruptible) | postgres: 11/main: postgres benchmark [local] UPDATE                | /var/lib/postgresql/11/main/base/16399/16412                 | write           | ext4_buffered_write_iter        | ksys_write()->vfs_write()->ext4_buffered_write_iter()
+     608 |        0.39 | (kworker/u*:*+flush-*:*) | Disk (Uninterruptible) |                                                                     |                                                              | [kernel_thread] | rq_qos_wait                     | kthread()->worker_thread()->process_one_work()->wb_workfn()->wb_writeback()->__writeback_inodes_wb()->writeback_sb_inodes()->__writeback_single_inode()->do_writepages()->ext4_writepages()->mpage_prepare_extent_to_map()->mpage_process_page_bufs()->mpage_submit_page()->ext4_bio_write_page()->submit_bio_noacct_nocheck()->blk_mq_submit_bio()->__rq_qos_throttle()->wbt_wait()->rq_qos_wait()
+     298 |        0.19 | (postgres)               | Disk (Uninterruptible) | postgres: 11/main: background writer                                |                                                              | sync_file_range | rq_qos_wait                     | __x64_sys_sync_file_range()->sync_file_range()->__filemap_fdatawrite_range()->filemap_fdatawrite_wbc()->do_writepages()->ext4_writepages()->ext4_io_submit()->submit_bio_noacct_nocheck()->blk_mq_submit_bio()->__rq_qos_throttle()->wbt_wait()->rq_qos_wait()
+      56 |        0.04 | (postgres)               | Disk (Uninterruptible) | postgres: 11/main: checkpointer                                     | /var/lib/postgresql/11/main/base/16399/16412.1               | fsync           | rq_qos_wait                     | __x64_sys_fsync()->ext4_sync_file()->file_write_and_wait_range()->__filemap_fdatawrite_range()->filemap_fdatawrite_wbc()->do_writepages()->ext4_writepages()->mpage_prepare_extent_to_map()->mpage_process_page_bufs()->mpage_submit_page()->ext4_bio_write_page()->submit_bio_noacct_nocheck()->blk_mq_submit_bio()->__rq_qos_throttle()->wbt_wait()->rq_qos_wait()
+      53 |        0.03 | (postgres)               | Disk (Uninterruptible) | postgres: 11/main: checkpointer                                     | /var/lib/postgresql/11/main/base/16399/16412                 | fsync           | rq_qos_wait                     | __x64_sys_fsync()->ext4_sync_file()->file_write_and_wait_range()->__filemap_fdatawrite_range()->filemap_fdatawrite_wbc()->do_writepages()->ext4_writepages()->mpage_prepare_extent_to_map()->mpage_process_page_bufs()->mpage_submit_page()->ext4_bio_write_page()->submit_bio_noacct_nocheck()->blk_mq_submit_bio()->__rq_qos_throttle()->wbt_wait()->rq_qos_wait()
+      11 |        0.01 | (postgres)               | Disk (Uninterruptible) | postgres: 11/main: checkpointer                                     |                                                              | sync_file_range | rq_qos_wait                     | __x64_sys_sync_file_range()->sync_file_range()->__filemap_fdatawrite_range()->filemap_fdatawrite_wbc()->do_writepages()->ext4_writepages()->ext4_io_submit()->submit_bio_noacct_nocheck()->blk_mq_submit_bio()->__rq_qos_throttle()->wbt_wait()->rq_qos_wait()
+      11 |        0.01 | (postgres)               | Disk (Uninterruptible) | postgres: 11/main: postgres benchmark [local] COMMIT                | /var/lib/postgresql/11/main/pg_wal/000000010000001A00000040  | fdatasync       | rq_qos_wait                     | __x64_sys_fdatasync()->ext4_sync_file()->file_write_and_wait_range()->__filemap_fdatawrite_range()->filemap_fdatawrite_wbc()->do_writepages()->ext4_writepages()->ext4_io_submit()->submit_bio_noacct_nocheck()->blk_mq_submit_bio()->__rq_qos_throttle()->wbt_wait()->rq_qos_wait()
+      11 |        0.01 | (postgres)               | Disk (Uninterruptible) | postgres: 11/main: postgres benchmark [local] COMMIT                | /var/lib/postgresql/11/main/pg_wal/000000010000001A0000005C  | fdatasync       | rq_qos_wait                     | __x64_sys_fdatasync()->ext4_sync_file()->file_write_and_wait_range()->__filemap_fdatawrite_range()->filemap_fdatawrite_wbc()->do_writepages()->ext4_writepages()->ext4_io_submit()->submit_bio_noacct_nocheck()->blk_mq_submit_bio()->__rq_qos_throttle()->wbt_wait()->rq_qos_wait()
+      11 |        0.01 | (postgres)               | Disk (Uninterruptible) | postgres: 11/main: postgres benchmark [local] COMMIT                | /var/lib/postgresql/11/main/pg_wal/000000010000001A00000070  | fdatasync       | folio_wait_bit_common           | __x64_sys_fdatasync()->ext4_sync_file()->file_write_and_wait_range()->__filemap_fdatawait_range()->folio_wait_writeback()->folio_wait_bit_common()
+      11 |        0.01 | (postgres)               | Disk (Uninterruptible) | postgres: 11/main: postgres benchmark [local] COMMIT                | /var/lib/postgresql/11/main/pg_wal/000000010000001A000000EB  | fdatasync       | rq_qos_wait                     | __x64_sys_fdatasync()->ext4_sync_file()->file_write_and_wait_range()->__filemap_fdatawrite_range()->filemap_fdatawrite_wbc()->do_writepages()->ext4_writepages()->ext4_io_submit()->submit_bio_noacct_nocheck()->blk_mq_submit_bio()->__rq_qos_throttle()->wbt_wait()->rq_qos_wait()
+
+
+
+
+=== Active Threads ========================================================================================================================
+
+ samples | avg_threads | comm                                 | state                  | syscall         | wchan
+-------------------------------------------------------------------------------------------------------------------------------------------
+   23334 |       35.04 | (postgres)                           | Running (ON CPU)       | [running]       | 0
+     424 |        0.64 | (postgres)                           | Disk (Uninterruptible) | write           | ext4_buffered_write_iter
+     252 |        0.38 | (postgres)                           | Disk (Uninterruptible) | fdatasync       | folio_wait_bit_common
+     229 |        0.34 | (pgbench)                            | Running (ON CPU)       | select          | do_select
+     176 |        0.26 | (postgres)                           | Disk (Uninterruptible) | fdatasync       | rq_qos_wait
+     170 |        0.26 | (kworker/u*:*+flush-*:*)             | Disk (Uninterruptible) | [kernel_thread] | rq_qos_wait
+     151 |        0.23 | (postgres)                           | Running (ON CPU)       | futex           | futex_wait_queue
+     149 |        0.22 | (postgres)                           | Running (ON CPU)       | [running]       | do_epoll_wait
+     132 |        0.20 | (postgres)                           | Running (ON CPU)       | epoll_wait      | 0
+     113 |        0.17 | (postgres)                           | Disk (Uninterruptible) | sync_file_range | rq_qos_wait
+     104 |        0.16 | (postgres)                           | Running (ON CPU)       | [running]       | futex_wait_queue
+     103 |        0.15 | (postgres)                           | Disk (Uninterruptible) | fsync           | rq_qos_wait
+      80 |        0.12 | (pgbench)                            | Running (ON CPU)       | [running]       | do_select
+      52 |        0.08 | (pgbench)                            | Running (ON CPU)       | select          | 0
+      48 |        0.07 | (postgres)                           | Disk (Uninterruptible) | fdatasync       | submit_bio_wait
+      46 |        0.07 | (pgbench)                            | Running (ON CPU)       | [running]       | 0
+      44 |        0.07 | (postgres)                           | Running (ON CPU)       | epoll_wait      | do_epoll_wait
+      17 |        0.03 | (nprobe@lo)                          | Running (ON CPU)       | poll            | do_sys_poll
+      17 |        0.03 | (postgres)                           | Disk (Uninterruptible) | fsync           | jbd2_log_wait_commit
+      16 |        0.02 | (bzsenedrcore)                       | Running (ON CPU)       | [running]       | 0
+      13 |        0.02 | (bzsenedrcore)                       | Running (ON CPU)       | futex           | futex_wait_queue
+      13 |        0.02 | (postgres)                           | Disk (Uninterruptible) | [running]       | 0
+      11 |        0.02 | (jbd*/sdb*-*)                        | Disk (Uninterruptible) | [kernel_thread] | jbd2_journal_commit_transaction
+      10 |        0.02 | (bzsenedrcore)                       | Running (ON CPU)       | epoll_pwait     | do_epoll_wait
+       9 |        0.01 | (postgres)                           | Disk (Uninterruptible) | fdatasync       | 0
+       8 |        0.01 | (atop)                               | Running (ON CPU)       | [running]       | 0
+       7 |        0.01 | (bzsenedrcore)                       | Running (ON CPU)       | nanosleep       | hrtimer_nanosleep
+       7 |        0.01 | (jbd*/sdb*-*)                        | Disk (Uninterruptible) | [kernel_thread] | rq_qos_wait
+       7 |        0.01 | (postgres)                           | Running (ON CPU)       | fdatasync       | folio_wait_bit_common
+       5 |        0.01 | (postgres)                           | Running (ON CPU)       | [running]       | folio_wait_bit_common
+       4 |        0.01 | (kworker/*:*H+kblockd)               | Running (ON CPU)       | [kernel_thread] | worker_thread
+       4 |        0.01 | (postgres)                           | Disk (Uninterruptible) | write           | 0
+       4 |        0.01 | (postgres)                           | Running (ON CPU)       | fdatasync       | 0
+       3 |        0.00 | (node_exporter)                      | Running (ON CPU)       | [running]       | 0
+       2 |        0.00 | (atopacctd)                          | Running (ON CPU)       | [running]       | 0
+       2 |        0.00 | (bzsenedrcore)                       | Running (ON CPU)       | [running]       | do_epoll_wait
+       2 |        0.00 | (bzsenedrcore)                       | Running (ON CPU)       | nanosleep       | 0
+       2 |        0.00 | (ebpf_exporter)                      | Running (ON CPU)       | [running]       | 0
+       2 |        0.00 | (nprobe@lo)                          | Running (ON CPU)       | [running]       | 0
+       2 |        0.00 | (postgres)                           | Disk (Uninterruptible) | close           | ep_free
+       2 |        0.00 | (postgres)                           | Disk (Uninterruptible) | read            | do_get_write_access
+       2 |        0.00 | (postgres)                           | Disk (Uninterruptible) | write           | do_get_write_access
+       2 |        0.00 | (postgres)                           | Running (ON CPU)       | [running]       | ext4_buffered_write_iter
+       2 |        0.00 | (postgres)                           | Running (ON CPU)       | [running]       | submit_bio_wait
+       2 |        0.00 | (postgres)                           | Running (ON CPU)       | epoll_wait      | futex_wait_queue
+       2 |        0.00 | (postgres)                           | Running (ON CPU)       | write           | ext4_buffered_write_iter
+       2 |        0.00 | (zabbix_agent*)                      | Running (ON CPU)       | [running]       | 0
+       1 |        0.00 | (docker-init)                        | Running (ON CPU)       | [running]       | 0
+       1 |        0.00 | (dockerd)                            | Running (ON CPU)       | [running]       | 0
+       1 |        0.00 | (jbd*/sdb*-*)                        | Disk (Uninterruptible) | [kernel_thread] | 0
+       1 |        0.00 | (ksoftirqd/*)                        | Running (ON CPU)       | [kernel_thread] | smpboot_thread_fn
+       1 |        0.00 | (kworker/*:*+events_power_efficient) | Running (ON CPU)       | [running]       | 0
+       1 |        0.00 | (kworker/*:*H-kblockd)               | Running (ON CPU)       | [kernel_thread] | worker_thread
+       1 |        0.00 | (kworker/u*:*+ext*-rsv-conversion)   | Running (ON CPU)       | [running]       | 0
+       1 |        0.00 | (kworker/u*:*+flush-*:*)             | Running (ON CPU)       | [running]       | 0
+       1 |        0.00 | (kworker/u*:*+flush-*:*)             | Running (ON CPU)       | [running]       | rq_qos_wait
+       1 |        0.00 | (postgres)                           | Disk (Uninterruptible) | [running]       | rq_qos_wait
+       1 |        0.00 | (postgres)                           | Disk (Uninterruptible) | fsync           | submit_bio_wait
+       1 |        0.00 | (postgres)                           | Running (ON CPU)       | [running]       | do_select
+       1 |        0.00 | (postgres)                           | Running (ON CPU)       | [running]       | rq_qos_wait
+       1 |        0.00 | (postgres)                           | Running (ON CPU)       | write           | 0
+       1 |        0.00 | (rcu_preempt)                        | Running (ON CPU)       | [kernel_thread] | rcu_gp_fqs_loop
+       1 |        0.00 | (systemd)                            | Running (ON CPU)       | [running]       | 0
+       1 |        0.00 | (systemd-journal)                    | Running (ON CPU)       | [running]       | 0

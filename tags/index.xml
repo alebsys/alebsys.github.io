@@ -6,8 +6,22 @@
     <description>Recent content in Tags on Performance Matters!</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 16 Jun 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 10 Jul 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://alebsys.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Performance</title>
+      <link>https://alebsys.github.io/tags/performance/</link>
+      <pubDate>Wed, 10 Jul 2024 00:00:00 +0000</pubDate>
+      <guid>https://alebsys.github.io/tags/performance/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>TSA</title>
+      <link>https://alebsys.github.io/tags/tsa/</link>
+      <pubDate>Wed, 10 Jul 2024 00:00:00 +0000</pubDate>
+      <guid>https://alebsys.github.io/tags/tsa/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Cgroup</title>
       <link>https://alebsys.github.io/tags/cgroup/</link>

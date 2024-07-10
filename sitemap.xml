@@ -2,6 +2,24 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://alebsys.github.io/tags/performance/</loc>
+    <lastmod>2024-07-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://alebsys.github.io/</loc>
+    <lastmod>2024-07-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://alebsys.github.io/posts/</loc>
+    <lastmod>2024-07-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://alebsys.github.io/tags/</loc>
+    <lastmod>2024-07-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://alebsys.github.io/posts/tsa/</loc>
+    <lastmod>2024-07-10T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://alebsys.github.io/tags/tsa/</loc>
+    <lastmod>2024-07-10T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://alebsys.github.io/tags/cgroup/</loc>
     <lastmod>2024-06-16T00:00:00+00:00</lastmod>
   </url><url>
@@ -15,15 +33,6 @@
     <lastmod>2024-06-16T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://alebsys.github.io/posts/memory-soft-limit/</loc>
-    <lastmod>2024-06-16T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://alebsys.github.io/</loc>
-    <lastmod>2024-06-16T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://alebsys.github.io/posts/</loc>
-    <lastmod>2024-06-16T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://alebsys.github.io/tags/</loc>
     <lastmod>2024-06-16T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://alebsys.github.io/tags/calico/</loc>
