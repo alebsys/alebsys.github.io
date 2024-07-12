@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Grafana on Performance Matters!</title>
-    <link>http://localhost:1313/tags/grafana/</link>
+    <link>https://alebsys.github.io/tags/grafana/</link>
     <description>Recent content in Grafana on Performance Matters!</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Tue, 16 Apr 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/grafana/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://alebsys.github.io/tags/grafana/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Tooling. Cache Hit Ratio</title>
-      <link>http://localhost:1313/posts/cachestat-ebpf-exporter/</link>
+      <link>https://alebsys.github.io/posts/cachestat-ebpf-exporter/</link>
       <pubDate>Tue, 16 Apr 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/cachestat-ebpf-exporter/</guid>
+      <guid>https://alebsys.github.io/posts/cachestat-ebpf-exporter/</guid>
       <description>Об утилите cachestat я узнал из статьи Brendan Gregg - Analyzing a High Rate of Paging.
 В ней расследуются причины аномально долгого процессинга файлов размером в 100Gbytes, тогда как файлы в 40Gbytes обрабатывались на несколько порядков быстрее.
 В том кейсе точно поставить диагноз - большой объект не помещался в кеш, что приводило к trashing&amp;rsquo;у страниц памяти, автору помог инструмент cachestat.
@@ -20,9 +20,9 @@
     </item>
     <item>
       <title>Tooling. Latency I/O операций</title>
-      <link>http://localhost:1313/posts/xfs-ebpf-exporter/</link>
+      <link>https://alebsys.github.io/posts/xfs-ebpf-exporter/</link>
       <pubDate>Fri, 05 Apr 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/xfs-ebpf-exporter/</guid>
+      <guid>https://alebsys.github.io/posts/xfs-ebpf-exporter/</guid>
       <description>Проблематика Чтобы оценить производительность ввода/вывода обычно принято обращаться к метрикам дисковой подсистемы, благо они богато представлены “стандартными” инструментами linux - sar, iostat, atop, etc.
 Проблема данного подхода, в упрощении общей картины, он игнорирует такой важный компонент в работе I/O подсистемы как файловая система.
 Например:
@@ -30,9 +30,9 @@
     </item>
     <item>
       <title>Tooling. TCP ретрансмиты и их направления</title>
-      <link>http://localhost:1313/posts/tcp-retransmit-ebpf-exporter/</link>
+      <link>https://alebsys.github.io/posts/tcp-retransmit-ebpf-exporter/</link>
       <pubDate>Tue, 19 Mar 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/tcp-retransmit-ebpf-exporter/</guid>
+      <guid>https://alebsys.github.io/posts/tcp-retransmit-ebpf-exporter/</guid>
       <description>Объем TCP ретрансмитов пожалуй один из наиболее говорящих симптомов деградации системы.
 Причины возникновения могут быть различны, самые частые в моей практике:
 переполнения очередей, на уровнях сетевого оборудования, NIC, операционной системы, сокетов, etc; out of order пакеты, связанные например с неоднородными маршрутами в рамках одного сетевого потока. В момент проблемы хочется быстро ее обнаружить и определить источник.

@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Calico on Performance Matters!</title>
-    <link>http://localhost:1313/tags/calico/</link>
+    <link>https://alebsys.github.io/tags/calico/</link>
     <description>Recent content in Calico on Performance Matters!</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Thu, 23 May 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/calico/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://alebsys.github.io/tags/calico/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Где мой трафик?</title>
-      <link>http://localhost:1313/posts/metallb-calico-ebpf/</link>
+      <link>https://alebsys.github.io/posts/metallb-calico-ebpf/</link>
       <pubDate>Thu, 23 May 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/metallb-calico-ebpf/</guid>
+      <guid>https://alebsys.github.io/posts/metallb-calico-ebpf/</guid>
       <description>Наблюдаемость и простота отладки одни из важнейших свойств системы, которые следует учитывать уже на этапе выбора технологий. В противном случае может быть больно и дорого.
 Следующий этап - разобраться как технология устроена и желательно сделать это еще до развертывания в боевых окружениях. Но бывает конечно по всякому.
 Сегодня рассмотрим сеть в Kubernetes и выявим несоответствия в учете трафика, которые могут вводить в заблуждение.
