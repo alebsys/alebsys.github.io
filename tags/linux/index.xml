@@ -6,8 +6,15 @@
     <description>Recent content in Linux on Performance Matters</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 16 Jun 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 08 Aug 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://alebsys.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>TCP Congestion Control в разных окружениях</title>
+      <link>https://alebsys.github.io/posts/cwnd-retransmit/</link>
+      <pubDate>Thu, 08 Aug 2024 00:00:00 +0000</pubDate>
+      <guid>https://alebsys.github.io/posts/cwnd-retransmit/</guid>
+      <description>Протестировал работу TCP Congestion Control в Linux в различных по качеству окружениях, поделюсь результатами.</description>
+    </item>
     <item>
       <title>Memory Soft limits</title>
       <link>https://alebsys.github.io/posts/memory-soft-limit/</link>

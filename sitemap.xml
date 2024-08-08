@@ -2,16 +2,31 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://alebsys.github.io/tags/performance/</loc>
-    <lastmod>2024-07-10T00:00:00+00:00</lastmod>
+    <loc>https://alebsys.github.io/tags/congestion-control/</loc>
+    <lastmod>2024-08-08T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://alebsys.github.io/tags/linux/</loc>
+    <lastmod>2024-08-08T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://alebsys.github.io/</loc>
-    <lastmod>2024-07-10T00:00:00+00:00</lastmod>
+    <lastmod>2024-08-08T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://alebsys.github.io/posts/</loc>
-    <lastmod>2024-07-10T00:00:00+00:00</lastmod>
+    <lastmod>2024-08-08T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://alebsys.github.io/tags/retransmits/</loc>
+    <lastmod>2024-08-08T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://alebsys.github.io/tags/</loc>
+    <lastmod>2024-08-08T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://alebsys.github.io/tags/tcp/</loc>
+    <lastmod>2024-08-08T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://alebsys.github.io/posts/cwnd-retransmit/</loc>
+    <lastmod>2024-08-08T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://alebsys.github.io/tags/performance/</loc>
     <lastmod>2024-07-10T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://alebsys.github.io/posts/tsa/</loc>
@@ -24,9 +39,6 @@
     <lastmod>2024-06-16T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://alebsys.github.io/tags/docker/</loc>
-    <lastmod>2024-06-16T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://alebsys.github.io/tags/linux/</loc>
     <lastmod>2024-06-16T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://alebsys.github.io/tags/memory/</loc>
@@ -54,9 +66,6 @@
     <lastmod>2024-05-14T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://alebsys.github.io/tags/network/</loc>
-    <lastmod>2024-05-14T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://alebsys.github.io/tags/tcp/</loc>
     <lastmod>2024-05-14T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://alebsys.github.io/tags/tuning/</loc>
