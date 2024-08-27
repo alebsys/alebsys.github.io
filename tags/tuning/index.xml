@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Tuning on Performance Matters</title>
-    <link>https://alebsys.github.io/tags/tuning/</link>
+    <link>https://alebedev.tech/tags/tuning/</link>
     <description>Recent content in Tuning on Performance Matters</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Tue, 14 May 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://alebsys.github.io/tags/tuning/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://alebedev.tech/tags/tuning/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Long way to the application, №2.</title>
-      <link>https://alebsys.github.io/posts/long-way-to-the-app-2/</link>
+      <link>https://alebedev.tech/posts/long-way-to-the-app-2/</link>
       <pubDate>Tue, 14 May 2024 00:00:00 +0000</pubDate>
-      <guid>https://alebsys.github.io/posts/long-way-to-the-app-2/</guid>
+      <guid>https://alebedev.tech/posts/long-way-to-the-app-2/</guid>
       <description>Привет!
 Продолжаем изучать маршрут сетевого пакета по подсистемам ядра linux.
 В первой части мы разобрали отрезок от сетевой карты гипервизора до txqueue - очередь перед виртуальной машиной в которой и крутится наш сервис.
@@ -22,9 +22,9 @@ RX queue Процесс обработки трафика виртуальной
     </item>
     <item>
       <title>Long way to the application, №1.</title>
-      <link>https://alebsys.github.io/posts/long-way-to-the-app-1/</link>
+      <link>https://alebedev.tech/posts/long-way-to-the-app-1/</link>
       <pubDate>Sun, 21 Apr 2024 00:00:00 +0000</pubDate>
-      <guid>https://alebsys.github.io/posts/long-way-to-the-app-1/</guid>
+      <guid>https://alebedev.tech/posts/long-way-to-the-app-1/</guid>
       <description>Прежде чем сетевой пакет из сервиса А попадет в сервис Б, ему следует миновать множество систем по середине&amp;hellip;</description>
     </item>
   </channel>

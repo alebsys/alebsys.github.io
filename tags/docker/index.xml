@@ -2,17 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Docker on Performance Matters</title>
-    <link>https://alebsys.github.io/tags/docker/</link>
+    <link>https://alebedev.tech/tags/docker/</link>
     <description>Recent content in Docker on Performance Matters</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 16 Jun 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://alebsys.github.io/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 27 Aug 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://alebedev.tech/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>&#34;bash: curl: command not found&#34;</title>
+      <link>https://alebedev.tech/posts/bash-curl-not-found/</link>
+      <pubDate>Tue, 27 Aug 2024 00:00:00 +0000</pubDate>
+      <guid>https://alebedev.tech/posts/bash-curl-not-found/</guid>
+      <description>Или как траблшутить контейнеры когда нечем.</description>
+    </item>
     <item>
       <title>Memory Soft limits</title>
-      <link>https://alebsys.github.io/posts/memory-soft-limit/</link>
+      <link>https://alebedev.tech/posts/memory-soft-limit/</link>
       <pubDate>Sun, 16 Jun 2024 00:00:00 +0000</pubDate>
-      <guid>https://alebsys.github.io/posts/memory-soft-limit/</guid>
+      <guid>https://alebedev.tech/posts/memory-soft-limit/</guid>
       <description>Изучая возможности контрольных групп в linux наткнулся на параметр memory.soft_limit_in_bytes:
 When the system detects memory contention or low memory, control groups are pushed back to their soft limits. If the soft limit of each control group is very high, they are pushed back as much as possible to make sure that one control group does not starve the others of memory.
 Аналог в cgroup2 - memory.low

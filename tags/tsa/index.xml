@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>TSA on Performance Matters</title>
-    <link>https://alebsys.github.io/tags/tsa/</link>
+    <link>https://alebedev.tech/tags/tsa/</link>
     <description>Recent content in TSA on Performance Matters</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Wed, 10 Jul 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://alebsys.github.io/tags/tsa/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://alebedev.tech/tags/tsa/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Thread State Analysis</title>
-      <link>https://alebsys.github.io/posts/tsa/</link>
+      <link>https://alebedev.tech/posts/tsa/</link>
       <pubDate>Wed, 10 Jul 2024 00:00:00 +0000</pubDate>
-      <guid>https://alebsys.github.io/posts/tsa/</guid>
+      <guid>https://alebedev.tech/posts/tsa/</guid>
       <description>Сессия траблшутинга - это не только конечный результат, но и процесс, протекающий с различной степенью эффективности. Одного умения пользоваться инструментами, знать флаги и уверенно работать в консоли недостаточно. Необходима систематизация.</description>
     </item>
   </channel>

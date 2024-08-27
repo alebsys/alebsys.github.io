@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Xfs on Performance Matters</title>
-    <link>https://alebsys.github.io/tags/xfs/</link>
+    <link>https://alebedev.tech/tags/xfs/</link>
     <description>Recent content in Xfs on Performance Matters</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Fri, 05 Apr 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://alebsys.github.io/tags/xfs/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://alebedev.tech/tags/xfs/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Tooling. Latency I/O операций</title>
-      <link>https://alebsys.github.io/posts/xfs-ebpf-exporter/</link>
+      <link>https://alebedev.tech/posts/xfs-ebpf-exporter/</link>
       <pubDate>Fri, 05 Apr 2024 00:00:00 +0000</pubDate>
-      <guid>https://alebsys.github.io/posts/xfs-ebpf-exporter/</guid>
+      <guid>https://alebedev.tech/posts/xfs-ebpf-exporter/</guid>
       <description>Проблематика Чтобы оценить производительность ввода/вывода обычно принято обращаться к метрикам дисковой подсистемы, благо они богато представлены “стандартными” инструментами linux - sar, iostat, atop, etc.
 Проблема данного подхода, в упрощении общей картины, он игнорирует такой важный компонент в работе I/O подсистемы как файловая система.
 Например:

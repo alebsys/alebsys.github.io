@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Retransmits on Performance Matters</title>
-    <link>https://alebsys.github.io/tags/retransmits/</link>
+    <link>https://alebedev.tech/tags/retransmits/</link>
     <description>Recent content in Retransmits on Performance Matters</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Thu, 08 Aug 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://alebsys.github.io/tags/retransmits/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://alebedev.tech/tags/retransmits/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>TCP Congestion Control в разных окружениях</title>
-      <link>https://alebsys.github.io/posts/cwnd-retransmit/</link>
+      <title>TCP Congestion Control in Action</title>
+      <link>https://alebedev.tech/posts/cwnd-retransmit/</link>
       <pubDate>Thu, 08 Aug 2024 00:00:00 +0000</pubDate>
-      <guid>https://alebsys.github.io/posts/cwnd-retransmit/</guid>
+      <guid>https://alebedev.tech/posts/cwnd-retransmit/</guid>
       <description>Протестировал работу TCP Congestion Control в Linux в различных по качеству окружениях, поделюсь результатами.</description>
     </item>
   </channel>
