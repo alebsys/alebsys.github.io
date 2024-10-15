@@ -6,20 +6,41 @@
     <description>Recent content in Tags on Performance Matters</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 27 Aug 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 14 Oct 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://alebedev.tech/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Docker</title>
-      <link>https://alebedev.tech/tags/docker/</link>
-      <pubDate>Tue, 27 Aug 2024 00:00:00 +0000</pubDate>
-      <guid>https://alebedev.tech/tags/docker/</guid>
+      <title>Kafka</title>
+      <link>https://alebedev.tech/tags/kafka/</link>
+      <pubDate>Mon, 14 Oct 2024 00:00:00 +0000</pubDate>
+      <guid>https://alebedev.tech/tags/kafka/</guid>
       <description></description>
     </item>
     <item>
       <title>Linux</title>
       <link>https://alebedev.tech/tags/linux/</link>
-      <pubDate>Tue, 27 Aug 2024 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 14 Oct 2024 00:00:00 +0000</pubDate>
       <guid>https://alebedev.tech/tags/linux/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Performance</title>
+      <link>https://alebedev.tech/tags/performance/</link>
+      <pubDate>Mon, 14 Oct 2024 00:00:00 +0000</pubDate>
+      <guid>https://alebedev.tech/tags/performance/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Troubleshooting</title>
+      <link>https://alebedev.tech/tags/troubleshooting/</link>
+      <pubDate>Mon, 14 Oct 2024 00:00:00 +0000</pubDate>
+      <guid>https://alebedev.tech/tags/troubleshooting/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Docker</title>
+      <link>https://alebedev.tech/tags/docker/</link>
+      <pubDate>Tue, 27 Aug 2024 00:00:00 +0000</pubDate>
+      <guid>https://alebedev.tech/tags/docker/</guid>
       <description></description>
     </item>
     <item>
@@ -41,13 +62,6 @@
       <link>https://alebedev.tech/tags/retransmits/</link>
       <pubDate>Thu, 08 Aug 2024 00:00:00 +0000</pubDate>
       <guid>https://alebedev.tech/tags/retransmits/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Performance</title>
-      <link>https://alebedev.tech/tags/performance/</link>
-      <pubDate>Wed, 10 Jul 2024 00:00:00 +0000</pubDate>
-      <guid>https://alebedev.tech/tags/performance/</guid>
       <description></description>
     </item>
     <item>
@@ -174,13 +188,6 @@
       <link>https://alebedev.tech/tags/haproxy/</link>
       <pubDate>Sun, 31 Mar 2024 00:00:00 +0000</pubDate>
       <guid>https://alebedev.tech/tags/haproxy/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Troubleshooting</title>
-      <link>https://alebedev.tech/tags/troubleshooting/</link>
-      <pubDate>Sun, 31 Mar 2024 00:00:00 +0000</pubDate>
-      <guid>https://alebedev.tech/tags/troubleshooting/</guid>
       <description></description>
     </item>
   </channel>

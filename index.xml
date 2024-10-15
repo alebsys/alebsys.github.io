@@ -6,8 +6,18 @@
     <description>Recent content on Performance Matters</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 27 Aug 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 14 Oct 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://alebedev.tech/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Kafka и медленная запись</title>
+      <link>https://alebedev.tech/posts/kafka-ssl/</link>
+      <pubDate>Mon, 14 Oct 2024 00:00:00 +0000</pubDate>
+      <guid>https://alebedev.tech/posts/kafka-ssl/</guid>
+      <description>Разработчики провели нагрузочные тесты и выявили значительные задержки при записи данных в Kafka, что приводило к накоплению лага.
+Я подключился к анализу причин низкой производительности.
+Сильно упрощенный флоу:
+приложение пишет в Kafka (кластер на виртуальных машинах); Kafka работает в режиме acks=all и не поспевает за потоком событий; на приложении копится очередь на запись. Прежде чем детально разбираться с Kafka, я бегло проверил сетевые ресурсы и состояние машин. Аномалий выявлено не было.</description>
+    </item>
     <item>
       <title>&#34;bash: curl: command not found&#34;</title>
       <link>https://alebedev.tech/posts/bash-curl-not-found/</link>

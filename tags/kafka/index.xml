@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Performance on Performance Matters</title>
-    <link>https://alebedev.tech/tags/performance/</link>
-    <description>Recent content in Performance on Performance Matters</description>
+    <title>Kafka on Performance Matters</title>
+    <link>https://alebedev.tech/tags/kafka/</link>
+    <description>Recent content in Kafka on Performance Matters</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Mon, 14 Oct 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://alebedev.tech/tags/performance/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://alebedev.tech/tags/kafka/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Kafka и медленная запись</title>
       <link>https://alebedev.tech/posts/kafka-ssl/</link>
@@ -17,13 +17,6 @@
 Я подключился к анализу причин низкой производительности.
 Сильно упрощенный флоу:
 приложение пишет в Kafka (кластер на виртуальных машинах); Kafka работает в режиме acks=all и не поспевает за потоком событий; на приложении копится очередь на запись. Прежде чем детально разбираться с Kafka, я бегло проверил сетевые ресурсы и состояние машин. Аномалий выявлено не было.</description>
-    </item>
-    <item>
-      <title>Thread State Analysis</title>
-      <link>https://alebedev.tech/posts/tsa/</link>
-      <pubDate>Wed, 10 Jul 2024 00:00:00 +0000</pubDate>
-      <guid>https://alebedev.tech/posts/tsa/</guid>
-      <description>Сессия траблшутинга - это не только конечный результат, но и процесс, протекающий с различной степенью эффективности. Одного умения пользоваться инструментами, знать флаги и уверенно работать в консоли недостаточно. Необходима систематизация.</description>
     </item>
   </channel>
 </rss>
