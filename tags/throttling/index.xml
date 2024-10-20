@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Throttling on Performance Matters</title>
+    <link>https://alebedev.tech/tags/throttling/</link>
+    <description>Recent content in Throttling on Performance Matters</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 20 Oct 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://alebedev.tech/tags/throttling/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CPU Throttling и Runqueue</title>
+      <link>https://alebedev.tech/posts/cpu-throttling/</link>
+      <pubDate>Sun, 20 Oct 2024 00:00:00 +0000</pubDate>
+      <guid>https://alebedev.tech/posts/cpu-throttling/</guid>
+      <description>Объём ресурсов, потребляемый контейнером, учитывается на уровне cgroup, к которой он относится.
+Контейнер состоит из одного или более процессов, а процесс — из одного или более тредов.
+Абстракцию можно углубить, разбивая тред на «зелёные потоки», в зависимости от рантайма это могут быть горутины (Golang), корутины (Kotlin/Python), виртуальные треды (Java) и другие.
+Но о «зелёных» потоках Linux не знает, для него единицей планирования является тред (в терминах ядра — task_struct). Именно он планируется, выполняется и вытесняется другими тредами для выполнения на CPU.</description>
+    </item>
+  </channel>
+</rss>
