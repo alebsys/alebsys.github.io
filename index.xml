@@ -6,8 +6,15 @@
     <description>Recent content on Performance Matters</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 20 Oct 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 21 Nov 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://alebedev.tech/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Как считается TCP Window Clamp</title>
+      <link>https://alebedev.tech/posts/tcp-window-clamp/</link>
+      <pubDate>Thu, 21 Nov 2024 00:00:00 +0000</pubDate>
+      <guid>https://alebedev.tech/posts/tcp-window-clamp/</guid>
+      <description>Разбор статьи от Netflix &amp;ldquo;Investigation of a Cross-regional Network Performance Issue&amp;rdquo;</description>
+    </item>
     <item>
       <title>CPU Throttling и Runqueue</title>
       <link>https://alebedev.tech/posts/cpu-throttling/</link>
