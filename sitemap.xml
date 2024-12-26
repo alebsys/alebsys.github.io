@@ -2,22 +2,31 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://alebedev.tech/tags/ebpf/</loc>
+    <lastmod>2024-12-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://alebedev.tech/tags/linux/</loc>
+    <lastmod>2024-12-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://alebedev.tech/</loc>
+    <lastmod>2024-12-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://alebedev.tech/posts/</loc>
+    <lastmod>2024-12-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://alebedev.tech/tags/</loc>
+    <lastmod>2024-12-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://alebedev.tech/tags/tcp/</loc>
+    <lastmod>2024-12-26T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://alebedev.tech/posts/rtt-tcpconnlat/</loc>
+    <lastmod>2024-12-26T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://alebedev.tech/tags/deep-dive/</loc>
     <lastmod>2024-11-21T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://alebedev.tech/tags/kernel/</loc>
-    <lastmod>2024-11-21T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://alebedev.tech/</loc>
-    <lastmod>2024-11-21T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://alebedev.tech/posts/</loc>
-    <lastmod>2024-11-21T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://alebedev.tech/tags/</loc>
-    <lastmod>2024-11-21T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://alebedev.tech/tags/tcp/</loc>
     <lastmod>2024-11-21T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://alebedev.tech/posts/tcp-window-clamp/</loc>
@@ -27,9 +36,6 @@
     <lastmod>2024-10-20T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://alebedev.tech/posts/cpu-throttling/</loc>
-    <lastmod>2024-10-20T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://alebedev.tech/tags/linux/</loc>
     <lastmod>2024-10-20T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://alebedev.tech/tags/throttling/</loc>
@@ -78,9 +84,6 @@
     <lastmod>2024-06-16T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://alebedev.tech/tags/calico/</loc>
-    <lastmod>2024-05-23T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://alebedev.tech/tags/ebpf/</loc>
     <lastmod>2024-05-23T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://alebedev.tech/tags/kubernets/</loc>

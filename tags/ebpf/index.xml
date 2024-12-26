@@ -6,8 +6,15 @@
     <description>Recent content in Ebpf on Performance Matters</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 23 May 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 26 Dec 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://alebedev.tech/tags/ebpf/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Сетевой анализ с eBPF: измеряем Round Trip Time</title>
+      <link>https://alebedev.tech/posts/rtt-tcpconnlat/</link>
+      <pubDate>Thu, 26 Dec 2024 00:00:00 +0000</pubDate>
+      <guid>https://alebedev.tech/posts/rtt-tcpconnlat/</guid>
+      <description>Разбираем сложность интерпретации Latency и пишем свой инструмент на eBPF, который эту сложность снижает.</description>
+    </item>
     <item>
       <title>Где мой трафик?</title>
       <link>https://alebedev.tech/posts/metallb-calico-ebpf/</link>
