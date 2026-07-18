@@ -1,0 +1,64 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  lang?: string;
+  altLang?: { href: string; label: string };
+}
+const {
+  title,
+  description = 'Aleksandr Lebedev — performance engineering, Linux internals, networking.',
+  lang = 'ru',
+  altLang,
+} = Astro.props;
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.ico" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/consulting/">Consulting</a>
+      {altLang && <a class="lang" href={altLang.href}>{altLang.label}</a>}
+    </nav>
+    <main>
+      <slot />
+    </main>
+    <style is:global>
+      :root {
+        --text: #1a1a1a;
+        --muted: #555;
+        --link: #0b5394;
+        --max-width: 52rem;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0 auto;
+        padding: 2.5rem 1.25rem 4rem;
+        max-width: var(--max-width);
+        font-family: Georgia, 'Times New Roman', serif;
+        font-size: 1.06rem;
+        line-height: 1.6;
+        color: var(--text);
+        background: #fff;
+      }
+      nav { display: flex; margin-bottom: 2.5rem; font-family: system-ui, sans-serif; font-size: 0.95rem; }
+      nav .lang { margin-left: auto; margin-right: 0; }
+      nav a { margin-right: 1.25rem; color: var(--muted); text-decoration: none; }
+      nav a:hover { color: var(--link); text-decoration: underline; }
+      h1 { font-size: 1.7rem; line-height: 1.25; margin: 0 0 0.5rem; }
+      h2 { font-size: 1.25rem; margin: 2rem 0 0.5rem; }
+      a { color: var(--link); }
+      ul { padding-left: 1.25rem; }
+      li { margin-bottom: 0.35rem; }
+      .subtitle { color: var(--muted); margin-top: 0; }
+      footer { margin-top: 3rem; color: var(--muted); font-size: 0.95rem; }
+    </style>
+  </body>
+</html>

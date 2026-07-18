@@ -1,0 +1,38 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base
+  title="Aleksandr Lebedev — performance engineering"
+  lang="en"
+  altLang={{ href: '/', label: 'RU' }}
+>
+  <h1>Aleksandr Lebedev</h1>
+
+  <p>
+    Performance engineer at an HFT fund. My work is low latency across the whole stack: code, runtime, OS, hardware.
+  </p>
+
+  <p>
+    Before that I was an SRE responsible for reliability at one of the largest
+    e-commerce companies in Russia.
+  </p>
+
+  <h2>Projects</h2>
+  <ul>
+    <li>
+      <a href="https://github.com/cloudflare/ebpf_exporter">cloudflare/ebpf_exporter</a>:
+      TCP retransmits instrumentation, xfsdist/ext4dist port, cachestat
+      migration from kprobe to kfunc and tracepoints
+    </li>
+    <li>
+      <a href="https://github.com/prometheus/procfs">prometheus/procfs</a>:
+      UDP drops parsing support
+    </li>
+  </ul>
+
+  <h2>Contact</h2>
+  <p>
+    Telegram: <a href="https://t.me/alebsys">@alebsys</a> ·
+    LinkedIn: <a href="https://linkedin.com/in/alebsys">@alebsys</a>
+  </p>
+</Base>
