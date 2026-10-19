@@ -69,7 +69,7 @@ Counters and run time were measured with `perf` (output trimmed):
 ```bash
 perf stat -r 5 \
   -e cycles,instructions,page-faults,dTLB-loads,dTLB-load-misses \
-  ./bechmark
+  ./benchmark
 ```
 
 ```text

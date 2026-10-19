@@ -15,7 +15,7 @@ const {
 
 const nav =
   lang === 'en'
-    ? [{ href: '/en/', label: 'Home' }, { href: '/en/posts/', label: 'Posts' }]
+    ? [{ href: '/en/', label: 'Home' }, { href: '/en/posts/', label: 'Posts' }, { href: '/en/consulting/', label: 'Consulting' }]
     : [{ href: '/', label: 'Home' }, { href: '/posts/', label: 'Posts' }, { href: '/consulting/', label: 'Consulting' }];
 ---
 <!doctype html>
@@ -126,6 +126,11 @@ const nav =
       article h2 { font-size: 1.3rem; }
       article h3 { font-size: 1.1rem; margin: 1.5rem 0 0.4rem; }
       article img { max-width: 100%; height: auto; border-radius: 4px; }
+      /* Графики нарисованы на белом фоне: в тёмной теме инвертируем яркость, hue-rotate возвращает оттенки. */
+      :root[data-theme='dark'] article img { filter: invert(0.88) hue-rotate(180deg); }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme='light']) article img { filter: invert(0.88) hue-rotate(180deg); }
+      }
       article blockquote { margin: 1rem 0; padding-left: 1rem; border-left: 3px solid var(--border); color: var(--muted); }
       article table { border-collapse: collapse; margin: 1rem 0; font-size: 0.95rem; }
       article th, article td { border: 1px solid var(--border); padding: 0.3rem 0.6rem; }

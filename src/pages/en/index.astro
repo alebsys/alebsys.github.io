@@ -7,6 +7,7 @@ const posts = await getPosts('en');
 <Base
   title="Aleksandr Lebedev — performance engineering"
   lang="en"
+  altLang={{ href: '/', label: 'RU' }}
 >
   <h1>Aleksandr Lebedev</h1>
 
@@ -17,6 +18,10 @@ const posts = await getPosts('en');
   <p>
     Before that I was an SRE responsible for reliability at one of the largest
     e-commerce companies in Russia.
+  </p>
+
+  <p>
+    I consult fellow engineers on career and technical questions. <a href="/en/consulting/">More</a>.
   </p>
 
   {posts.length > 0 && (

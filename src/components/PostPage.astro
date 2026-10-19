@@ -15,8 +15,8 @@ const { post, posts, lang } = Astro.props;
 const { Content } = await render(post);
 
 const t = {
-  ru: { author: 'Александр Лебедев', telegram: 'обсуждение в Telegram', series: 'Серия' },
-  en: { author: 'Aleksandr Lebedev', telegram: 'discussion on Telegram', series: 'Series' },
+  ru: { author: 'Александр Лебедев', telegram: 'обсуждение в Telegram', series: 'Серия', other: 'English version' },
+  en: { author: 'Aleksandr Lebedev', telegram: 'discussion on Telegram', series: 'Series', other: 'Русская версия' },
 }[lang];
 
 // Остальные части той же серии, от ранних к поздним.
@@ -24,9 +24,10 @@ const seriesPosts = post.data.series
   ? posts.filter((p) => p.data.series === post.data.series).reverse()
   : [];
 
-// Кнопка языка ведёт на перевод этой статьи, если он есть, иначе на список статей.
+// Ссылка на перевод — только если он есть.
 const otherLang: Lang = lang === 'ru' ? 'en' : 'ru';
 const translated = (await getPosts(otherLang)).some((p) => p.id === post.id);
+// Кнопка языка в меню: перевод статьи, а если его нет — список статей.
 const altLang = {
   href: translated ? postHref(otherLang, post.id) : otherLang === 'en' ? '/en/posts/' : '/posts/',
   label: otherLang.toUpperCase(),
@@ -39,6 +40,7 @@ const altLang = {
     <p class="subtitle">
       <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date, lang)}</time>
       {post.data.telegram && <> · <a href={post.data.telegram}>{t.telegram}</a></>}
+      {translated && <> · <a href={postHref(otherLang, post.id)} hreflang={otherLang} lang={otherLang}>{t.other}</a></>}
     </p>
     <Content />
   </article>
