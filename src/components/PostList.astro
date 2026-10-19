@@ -1,0 +1,37 @@
+---
+import Base from '../layouts/Base.astro';
+import { getAllPostLinks, type Lang } from '../lib/posts';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const posts = await getAllPostLinks(lang);
+const years = [...new Set(posts.map((p) => p.date.getFullYear()))];
+
+const t = {
+  ru: { title: 'Статьи — Александр Лебедев', h1: 'Статьи', locale: 'ru-RU', channel: 'Короткие заметки — в канале' },
+  en: { title: 'Posts — Aleksandr Lebedev', h1: 'Posts', locale: 'en-GB', channel: 'Shorter notes (in Russian) are in the Telegram channel' },
+}[lang];
+---
+<Base title={t.title} lang={lang} altLang={lang === 'en' ? { href: '/posts/', label: 'RU' } : { href: '/en/posts/', label: 'EN' }}>
+  <h1>{t.h1}</h1>
+  <p class="subtitle">
+    {t.channel} <a href="https://t.me/troubleperf">about:performance</a>.
+  </p>
+
+  {years.map((year) => (
+    <>
+      <h2>{year}</h2>
+      <ul class="posts">
+        {posts.filter((p) => p.date.getFullYear() === year).map((post) => (
+          <li>
+            <a href={post.href}>{post.title}</a>
+            <span class="date">{post.date.toLocaleDateString(t.locale, { day: 'numeric', month: 'long' })}</span>
+          </li>
+        ))}
+      </ul>
+    </>
+  ))}
+</Base>

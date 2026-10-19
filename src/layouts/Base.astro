@@ -2,15 +2,21 @@
 interface Props {
   title: string;
   description?: string;
-  lang?: string;
+  lang?: 'ru' | 'en';
+  // Ссылка на эту же страницу на другом языке; по умолчанию — главная другого языка.
   altLang?: { href: string; label: string };
 }
 const {
   title,
   description = 'Aleksandr Lebedev — performance engineering, Linux internals, networking.',
   lang = 'ru',
-  altLang,
+  altLang = lang === 'en' ? { href: '/', label: 'RU' } : { href: '/en/', label: 'EN' },
 } = Astro.props;
+
+const nav =
+  lang === 'en'
+    ? [{ href: '/en/', label: 'Home' }, { href: '/en/posts/', label: 'Posts' }]
+    : [{ href: '/', label: 'Home' }, { href: '/posts/', label: 'Posts' }, { href: '/consulting/', label: 'Consulting' }];
 ---
 <!doctype html>
 <html lang={lang}>
@@ -18,26 +24,72 @@ const {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
+    <meta name="color-scheme" content="light dark" />
     <link rel="icon" href="/favicon.ico" />
     <title>{title}</title>
+    <!-- Статистика посещений, https://alebsys.goatcounter.com. С localhost не считает. -->
+    <script is:inline data-goatcounter="https://alebsys.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+    <script is:inline>
+      // До отрисовки, чтобы не мигала светлая тема. Без сохранённого выбора — по системе.
+      (function () {
+        var t = localStorage.getItem('theme');
+        if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+      })();
+    </script>
   </head>
   <body>
     <nav>
-      <a href="/">Home</a>
-      <a href="/consulting/">Consulting</a>
-      {altLang && <a class="lang" href={altLang.href}>{altLang.label}</a>}
+      {nav.map((item) => <a href={item.href}>{item.label}</a>)}
+      <span class="nav-right">
+        <a class="lang" href={altLang.href} hreflang={altLang.label.toLowerCase()}>{altLang.label}</a>
+        <button class="theme-toggle" type="button" aria-label={lang === 'en' ? 'Toggle dark theme' : 'Переключить тёмную тему'}>
+          <span class="icon-dark">☾</span><span class="icon-light">☀</span>
+        </button>
+      </span>
     </nav>
     <main>
       <slot />
     </main>
+    <script is:inline>
+      document.querySelector('.theme-toggle').addEventListener('click', function () {
+        var root = document.documentElement;
+        var current = root.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        var next = current === 'dark' ? 'light' : 'dark';
+        root.dataset.theme = next;
+        localStorage.setItem('theme', next);
+      });
+    </script>
     <style is:global>
       :root {
         --text: #1a1a1a;
         --muted: #555;
         --link: #0b5394;
+        --bg: #fff;
+        --border: #ddd;
+        --code-bg: #f3f3f3;
         --max-width: 52rem;
       }
+      /* Тёмная тема: явный выбор или системная настройка, если выбора не было. */
+      :root[data-theme='dark'] {
+        --text: #e2e2e2;
+        --muted: #9a9a9a;
+        --link: #7fb2e5;
+        --bg: #16181c;
+        --border: #3a3d42;
+        --code-bg: #2a2d32;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme='light']) {
+          --text: #e2e2e2;
+          --muted: #9a9a9a;
+          --link: #7fb2e5;
+          --bg: #16181c;
+          --border: #3a3d42;
+          --code-bg: #2a2d32;
+        }
+      }
       * { box-sizing: border-box; }
+      html { background: var(--bg); }
       body {
         margin: 0 auto;
         padding: 2.5rem 1.25rem 4rem;
@@ -46,18 +98,40 @@ const {
         font-size: 1.06rem;
         line-height: 1.6;
         color: var(--text);
-        background: #fff;
+        background: var(--bg);
       }
-      nav { display: flex; margin-bottom: 2.5rem; font-family: system-ui, sans-serif; font-size: 0.95rem; }
-      nav .lang { margin-left: auto; margin-right: 0; }
+      nav { display: flex; align-items: center; margin-bottom: 2.5rem; font-family: system-ui, sans-serif; font-size: 0.95rem; }
       nav a { margin-right: 1.25rem; color: var(--muted); text-decoration: none; }
       nav a:hover { color: var(--link); text-decoration: underline; }
+      .nav-right { margin-left: auto; display: flex; align-items: center; gap: 1rem; }
+      .nav-right a { margin-right: 0; }
+      .theme-toggle { padding: 0; border: 0; background: none; color: var(--muted); font-size: 1.1rem; line-height: 1; cursor: pointer; }
+      .theme-toggle:hover { color: var(--link); }
+      .theme-toggle .icon-light { display: none; }
+      :root[data-theme='dark'] .theme-toggle .icon-dark { display: none; }
+      :root[data-theme='dark'] .theme-toggle .icon-light { display: inline; }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme='light']) .theme-toggle .icon-dark { display: none; }
+        :root:not([data-theme='light']) .theme-toggle .icon-light { display: inline; }
+      }
       h1 { font-size: 1.7rem; line-height: 1.25; margin: 0 0 0.5rem; }
       h2 { font-size: 1.25rem; margin: 2rem 0 0.5rem; }
       a { color: var(--link); }
+      hr { border: 0; border-top: 1px solid var(--border); margin: 2rem 0; }
       ul { padding-left: 1.25rem; }
       li { margin-bottom: 0.35rem; }
       .subtitle { color: var(--muted); margin-top: 0; }
+      .series { margin: 0 0 0.25rem; color: var(--muted); font-family: system-ui, sans-serif; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.04em; }
+      .posts .date { color: var(--muted); font-size: 0.9rem; margin-left: 0.5rem; white-space: nowrap; }
+      article h2 { font-size: 1.3rem; }
+      article h3 { font-size: 1.1rem; margin: 1.5rem 0 0.4rem; }
+      article img { max-width: 100%; height: auto; border-radius: 4px; }
+      article blockquote { margin: 1rem 0; padding-left: 1rem; border-left: 3px solid var(--border); color: var(--muted); }
+      article table { border-collapse: collapse; margin: 1rem 0; font-size: 0.95rem; }
+      article th, article td { border: 1px solid var(--border); padding: 0.3rem 0.6rem; }
+      pre { padding: 0.9rem 1rem; overflow-x: auto; font-size: 0.85rem; line-height: 1.45; border-radius: 4px; }
+      code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.9em; }
+      :not(pre) > code { background: var(--code-bg); padding: 0.1em 0.3em; border-radius: 3px; }
       footer { margin-top: 3rem; color: var(--muted); font-size: 0.95rem; }
     </style>
   </body>

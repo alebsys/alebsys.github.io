@@ -1,5 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
+import { getPosts, formatDate, fullTitle } from '../lib/posts';
+
+const posts = await getPosts();
 ---
 <Base
   title="Александр Лебедев — performance engineering"
@@ -25,6 +28,20 @@ import Base from '../layouts/Base.astro';
   <p>
     Консультирую коллег по карьерным и техническим вопросам. <a href="/consulting/">Подробнее</a>.
   </p>
+
+  {posts.length > 0 && (
+    <>
+      <h2>Статьи</h2>
+      <ul class="posts">
+        {posts.map((post) => (
+          <li>
+            <a href={`/posts/${post.id}/`}>{fullTitle(post.data)}</a>
+            <span class="date">{formatDate(post.data.date)}</span>
+          </li>
+        ))}
+      </ul>
+    </>
+  )}
 
   <h2>Избранное</h2>
   <ul>
@@ -58,6 +75,6 @@ import Base from '../layouts/Base.astro';
   <h2>Контакты</h2>
   <p>
     Telegram: <a href="https://t.me/alebsys">@alebsys</a> ·
-    LinkedIn: <a href="https://linkedin.com/in/alebsys">@alebsys</a>
+    LinkedIn: <a href="https://www.linkedin.com/in/alebsys/">@alebsys</a>
   </p>
 </Base>

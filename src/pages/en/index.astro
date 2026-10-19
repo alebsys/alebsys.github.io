@@ -1,10 +1,12 @@
 ---
-import Base from '../layouts/Base.astro';
+import Base from '../../layouts/Base.astro';
+import { getPosts, formatDate, fullTitle, postHref } from '../../lib/posts';
+
+const posts = await getPosts('en');
 ---
 <Base
   title="Aleksandr Lebedev — performance engineering"
   lang="en"
-  altLang={{ href: '/', label: 'RU' }}
 >
   <h1>Aleksandr Lebedev</h1>
 
@@ -16,6 +18,20 @@ import Base from '../layouts/Base.astro';
     Before that I was an SRE responsible for reliability at one of the largest
     e-commerce companies in Russia.
   </p>
+
+  {posts.length > 0 && (
+    <>
+      <h2>Posts</h2>
+      <ul class="posts">
+        {posts.map((post) => (
+          <li>
+            <a href={postHref('en', post.id)}>{fullTitle(post.data)}</a>
+            <span class="date">{formatDate(post.data.date, 'en')}</span>
+          </li>
+        ))}
+      </ul>
+    </>
+  )}
 
   <h2>Projects</h2>
   <ul>
@@ -33,6 +49,6 @@ import Base from '../layouts/Base.astro';
   <h2>Contact</h2>
   <p>
     Telegram: <a href="https://t.me/alebsys">@alebsys</a> ·
-    LinkedIn: <a href="https://linkedin.com/in/alebsys">@alebsys</a>
+    LinkedIn: <a href="https://www.linkedin.com/in/alebsys/">@alebsys</a>
   </p>
 </Base>

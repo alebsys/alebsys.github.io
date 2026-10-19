@@ -1,0 +1,56 @@
+---
+import { render, type CollectionEntry } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { getPosts, formatDate, fullTitle, postHref, type Lang } from '../lib/posts';
+
+type Post = CollectionEntry<'posts'> | CollectionEntry<'postsEn'>;
+
+interface Props {
+  post: Post;
+  posts: Post[];
+  lang: Lang;
+}
+
+const { post, posts, lang } = Astro.props;
+const { Content } = await render(post);
+
+const t = {
+  ru: { author: 'Александр Лебедев', telegram: 'обсуждение в Telegram', series: 'Серия' },
+  en: { author: 'Aleksandr Lebedev', telegram: 'discussion on Telegram', series: 'Series' },
+}[lang];
+
+// Остальные части той же серии, от ранних к поздним.
+const seriesPosts = post.data.series
+  ? posts.filter((p) => p.data.series === post.data.series).reverse()
+  : [];
+
+// Кнопка языка ведёт на перевод этой статьи, если он есть, иначе на список статей.
+const otherLang: Lang = lang === 'ru' ? 'en' : 'ru';
+const translated = (await getPosts(otherLang)).some((p) => p.id === post.id);
+const altLang = {
+  href: translated ? postHref(otherLang, post.id) : otherLang === 'en' ? '/en/posts/' : '/posts/',
+  label: otherLang.toUpperCase(),
+};
+---
+<Base title={`${fullTitle(post.data)} — ${t.author}`} description={post.data.description} lang={lang} altLang={altLang}>
+  <article>
+    {post.data.series && <p class="series">{post.data.series}</p>}
+    <h1>{post.data.title}</h1>
+    <p class="subtitle">
+      <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date, lang)}</time>
+      {post.data.telegram && <> · <a href={post.data.telegram}>{t.telegram}</a></>}
+    </p>
+    <Content />
+  </article>
+
+  {seriesPosts.length > 1 && (
+    <footer>
+      <p>{t.series} «{post.data.series}»:</p>
+      <ol>
+        {seriesPosts.map((p) => (
+          <li>{p.id === post.id ? p.data.title : <a href={postHref(lang, p.id)}>{p.data.title}</a>}</li>
+        ))}
+      </ol>
+    </footer>
+  )}
+</Base>
