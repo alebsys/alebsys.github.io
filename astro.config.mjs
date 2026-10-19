@@ -24,6 +24,10 @@ const publicDirIndex = {
 // https://astro.build/config
 export default defineConfig({
   site: 'https://alebsys.github.io',
+  markdown: {
+    // Светлая тема кода по умолчанию, тёмная включается CSS-переменными (см. Base.astro).
+    shikiConfig: { themes: { light: 'github-light', dark: 'github-dark' } },
+  },
   vite: {
     plugins: [publicDirIndex],
   },
